@@ -1,0 +1,605 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
+
+public class Level3Controller : MonoBehaviour
+{
+    public GameObject mapPanel, levelEndPanel;
+
+    [Header("Progress Meter")]
+    public GameObject progressMeter;
+    public GameObject step1, step2, step3, step4;
+    public Image step1Img, step2Img, step3Img, step4Img;
+    public Sprite red, green, yellow;
+
+    [Header("Task UI")]
+    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4;
+
+    [Header("Task End")]
+    public GameObject task1End, task2End, task3End, task4End;
+
+
+    public Button task3Next;
+    public Text answerText;
+
+    [Header("Hint Detectors")]
+    public GameObject[] rights;
+    public GameObject[] wrongs;
+    public GameObject[] points;
+
+    [HideInInspector]
+    public int taskNum;
+
+    [HideInInspector]
+    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount;
+    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount;
+    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints;
+    [Header("Next Buttons")]
+    public GameObject next1, next2, next3, next4;
+
+    public Button option1Btn, option2Btn, option3Btn;
+
+    public TMP_Text timerText;
+    public GameObject taskTimerObj;
+
+    Coroutine _taskTimerCoroutineRef;
+
+    public GameObject goodJobPanel, backBtn;
+
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, deactivateCurrentTasks = false;
+
+    public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
+
+    void Start()
+    {
+        backBtn.SetActive(false);
+        taskNum = 0;
+        task1HintCount = 0;
+        task2HintCount = 0;
+        task3HintCount = 0;
+        task4HintCount = 0;
+
+        task2Loaded = false;
+        task3Loaded = false;
+        task4Loaded = false;
+
+        // next1.SetActive(false);
+        next2.SetActive(false);
+        // next3.SetActive(false);
+        // next4.SetActive(false);
+
+        ShowScore();
+    }
+
+    #region Task 1
+
+    public void OnTask1NextClicked()
+    {
+        Task1();
+    }
+    void Task1()
+    {
+        GameManager.Instance.Level3Score = 0;
+        task1Promt.SetActive(false);
+        task1.SetActive(true);
+
+        progressMeter.SetActive(true);
+
+        taskNum = 1;
+        TaskCountStarsManager.Instance.InitiateStars(task1TasksCount);
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task1TasksCount * 5));
+    }
+
+    public IEnumerator LoadTask2()
+    {
+        task1End.SetActive(true);
+        // yield return new WaitForSeconds(1f);
+        task1End.SetActive(false);
+        if (task2Loaded)
+        {
+            yield break;
+        }
+
+        task2Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+
+        TaskCountStarsManager.Instance.ClearStars();
+
+        // if (task1HintCount == 0)
+        //     step1Img.sprite = red;
+        // else if (task1HintCount == 1)
+        //     step1Img.sprite = yellow;
+        // else if (task1HintCount == 2)
+        // {
+        //     step1Img.sprite = green;
+        //     goodJobPanel.SetActive(true);
+        // }
+        if (task1HintCount > 0 && task1NegativePoints > 0)
+        {
+            step1Img.sprite = yellow;
+        }
+        else if (task1HintCount == task1TasksCount)
+        {
+            step1Img.sprite = green;
+        }
+        else if (task1HintCount == 0)
+        {
+            step1Img.sprite = red;
+        }
+        else
+        {
+            step1Img.sprite = yellow;
+        }
+
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        Debug.Log("Task 2 is loading");
+        task1.SetActive(false);
+        //progressMeter.SetActive(false);
+        task2Promt.SetActive(true);
+
+        step1.SetActive(true);
+    }
+
+    #endregion
+
+    #region Task 2
+
+    public void OnTask2NextClicked()
+    {
+        Task2();
+    }
+    void Task2()
+    {
+        next2.SetActive(true);
+        task2Promt.SetActive(false);
+        task2.SetActive(true);
+
+        taskNum = 2;
+        TaskCountStarsManager.Instance.InitiateStars(task2TasksCount);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task2TasksCount * 5));
+        deactivateCurrentTasks = false;
+    }
+
+    public IEnumerator LoadTask3()
+    {
+        if (task3Loaded)
+        {
+            yield break;
+        }
+
+        task3Loaded = true;
+
+        Debug.Log("task 3 loading");
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+
+        TaskCountStarsManager.Instance.ClearStars();
+
+        if (task2HintCount > 0 && task2NegativePoints > 0)
+        {
+            step2Img.sprite = yellow;
+        }
+        else if (task2HintCount == task2TasksCount)
+        {
+            step2Img.sprite = green;
+        }
+        else if (task2HintCount == 0)
+        {
+            step2Img.sprite = red;
+        }
+        else
+        {
+            step2Img.sprite = yellow;
+        }
+
+        // yield return new WaitForSeconds(2f);
+        // Debug.Log("Task 3 is loading");
+        goodJobPanel.SetActive(false);
+        step2.SetActive(true);
+        task2.SetActive(false);
+        //progressMeter.SetActive(false);
+        task3.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        task3.SetActive(false);
+        task3Promt.SetActive(true);
+
+        taskNum = 3;
+
+        Debug.Log("Task 3 load called multiple times?");
+        deactivateCurrentTasks = false;
+        TaskCountStarsManager.Instance.InitiateStars(task3TasksCount);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task3TasksCount * 5));
+    }
+
+    #endregion
+
+    #region Task 3
+
+    public void OnOption3Clicked(GameObject btn)
+    {
+        // btn.GetComponent<Animation>().Play();
+        Color c = Color.red;
+        c.a = 0.5f;
+
+        btn.GetComponent<Image>().color = c;
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySound("wrong");
+        }
+        //answer is wrong
+        answerText.text = "Right Answer is A";
+        GameManager.Instance.Level3Score -= 0.25f;
+        // task3Next.interactable = true;
+        //DisableAllOptions();
+    }
+    public void OnOption2Clicked(GameObject btn)
+    {
+        Color c = Color.red;
+        c.a = 0.5f;
+        btn.GetComponent<Image>().color = c;
+        // btn.GetComponent<Animation>().Play();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySound("wrong");
+        }
+        GameManager.Instance.Level3Score -= 0.25f;
+        //answer is wrong
+        answerText.text = "Right Answer is A";
+        // task3Next.interactable = true;
+        //DisableAllOptions();
+    }
+
+    public void OnOption1Clicked(GameObject btn)
+    {
+        Color c = Color.green;
+        c.a = 0.5f;
+        TaskCountStarsManager.Instance.FillStar();
+        btn.GetComponent<Image>().color = c;
+        // btn.GetComponent<Animation>().Play();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySound("right");
+        }
+        answerText.text = "";
+        GameManager.Instance.Level3Score += 1;
+        // task3Next.interactable = true;
+        task3HintCount++;
+        DisableAllOptions();
+    }
+
+    void DisableAllOptions()
+    {
+        next3.SetActive(true);
+        option1Btn.interactable = false;
+        option2Btn.interactable = false;
+        option3Btn.interactable = false;
+    }
+    public void OnTask3NextClicked()
+    {
+        StartCoroutine(LoadTask4());
+    }
+
+    IEnumerator LoadTask4()
+    {
+        if (task4Loaded)
+        {
+            yield break;
+        }
+
+        task4Loaded = true;
+        Debug.Log("Loading 4");
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+
+        TaskCountStarsManager.Instance.ClearStars();
+
+        //progressMeter.SetActive(false);
+
+        if (task3HintCount > 0 && task3NegativePoints > 0)
+        {
+            step3Img.sprite = yellow;
+        }
+        else if (task3HintCount == task3TasksCount)
+        {
+            step3Img.sprite = green;
+        }
+        else if (task3HintCount == 0)
+        {
+            step3Img.sprite = red;
+        }
+        else
+        {
+            step3Img.sprite = yellow;
+        }
+
+        step3.SetActive(true);
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        task3Promt.SetActive(false);
+        task4Promt.SetActive(true);
+        progressMeter.SetActive(true);
+        taskNum = 4;
+        deactivateCurrentTasks = false;
+        TaskCountStarsManager.Instance.InitiateStars(task4TasksCount);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task4TasksCount * 5));
+    }
+
+    #endregion
+
+    #region Task 4
+
+    #endregion
+
+    #region Hints Handling
+    public void OnRightHintClicked(GameObject go)
+    {
+        if (deactivateCurrentTasks) return;
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlaySound("right");
+
+        TaskCountStarsManager.Instance.FillStar();
+
+        go.GetComponentInParent<Button>().interactable = false;
+        GameObject right = go.transform.GetChild(0).gameObject;
+        GameObject point = go.transform.GetChild(1).gameObject;
+
+        if (taskNum == 1)
+            task1HintCount++;
+        if (taskNum == 2)
+            task2HintCount++;
+        if (taskNum == 3)
+            task3HintCount++;
+        if (taskNum == 4)
+            task4HintCount++;
+
+        GameManager.Instance.Level3Score += 1;
+
+        //Debug.Log(taskHintCount);
+
+        right.SetActive(true);
+        point.SetActive(true);
+
+        StartCoroutine(WaitForRightWrong(go));
+    }
+
+    public void OnWrongHintClicked(GameObject go)
+    {
+        if (deactivateCurrentTasks) return;
+        if (AudioManager.instance != null)
+            AudioManager.instance.PlaySound("wrong");
+
+        go.GetComponentInParent<Button>().interactable = false;
+        GameObject wrong = go.transform.GetChild(0).gameObject;
+        GameObject point = go.transform.GetChild(1).gameObject;
+
+        if (taskNum == 1)
+            task1NegativePoints += 0.25f;
+        if (taskNum == 2)
+            task2NegativePoints += 0.25f;
+        if (taskNum == 3)
+            task3NegativePoints += 0.25f;
+        if (taskNum == 4)
+            task4NegativePoints += 0.25f;
+
+        GameManager.Instance.Level3Score -= 0.25f;
+
+        wrong.SetActive(true);
+        point.SetActive(true);
+        StartCoroutine(WaitForRightWrong(go));
+    }
+    IEnumerator WaitForRightWrong(GameObject obj)
+    {
+        if (taskNum == 4)
+        {
+            obj.GetComponent<Button>().interactable = false;
+        }
+        yield return new WaitForSeconds(2f);
+
+        if (taskNum == 1)
+        {
+            if (task1HintCount == task1TasksCount)
+            {
+                // next1.SetActive(true);
+                deactivateCurrentTasks = true;
+                StartCoroutine(LoadTask2());
+            }
+        }
+
+        if (taskNum == 2)
+        {
+            if (task2HintCount == task2TasksCount)
+            {
+                // next2.SetActive(true);
+                deactivateCurrentTasks = true;
+                StartCoroutine(LoadTask3());
+            }
+        }
+
+        if (taskNum == 3)
+        {
+            if (task3HintCount == task3TasksCount)
+            {
+                // next3.SetActive(true);
+                deactivateCurrentTasks = true;
+                StartCoroutine(LoadTask4());
+            }
+        }
+
+        if (taskNum == 4)
+        {
+            Debug.Log("Task 4 hint count: " + task4HintCount);
+            if (task4HintCount == task4TasksCount)
+            {
+                // next4.SetActive(true);
+                deactivateCurrentTasks = true;
+                StartCoroutine(WaitForLevelCompletion());
+            }
+            yield break;
+        }
+
+        obj.SetActive(false);
+
+        // if (taskNum == 1 && task1HintCount == 2)
+        //     StartCoroutine(LoadTask2());
+        // else if (taskNum == 2 && task2HintCount == 3)
+        //     StartCoroutine(LoadTask3());
+    }
+
+    #endregion
+
+    public void OnMapButtonClicked()
+    {
+        GameManager.Instance.Level3Score = 0;
+        next1.SetActive(true);
+        mapPanel.SetActive(false);
+        task1Promt.SetActive(true);
+        backBtn.SetActive(true);
+    }
+
+    public void OnMapSkipClicked()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void OnNextClicked()
+    {
+        TaskCountStarsManager.Instance.ClearStars();
+        if (taskNum == 1)
+        {
+            StartCoroutine(LoadTask2());
+        }
+        else if (taskNum == 2)
+        {
+            StartCoroutine(LoadTask3());
+        }
+        else if (taskNum == 3)
+        {
+            StartCoroutine(LoadTask4());
+        }
+        else if (taskNum == 4)
+        {
+            LevelCompleted();
+        }
+    }
+
+    public void LevelCompleted()
+    {
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+
+        // PlayerPrefs.SetInt("score", playerScore);
+
+        StartCoroutine(WaitForLevelCompletion());
+    }
+
+    IEnumerator WaitForLevelCompletion()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+
+        if (task4HintCount > 0 && task4NegativePoints > 0)
+        {
+            step4Img.sprite = yellow;
+        }
+        else if (task4HintCount == task4TasksCount)
+        {
+            step4Img.sprite = green;
+        }
+        else if (task4HintCount == 0)
+        {
+            step4Img.sprite = red;
+        }
+        else
+        {
+            step4Img.sprite = yellow;
+        }
+        step4.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        task4Promt.SetActive(false);
+        progressMeter.SetActive(false);
+        levelEndPanel.SetActive(true);
+        Debug.Log("Level 3 end reached");
+    }
+
+    IEnumerator TaskTimerCoroutine(int time = 25)
+    {
+        taskTimerObj.SetActive(true);
+        int i = time;
+        while (i > 0)
+        {
+            timerText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+            i--;
+        }
+        timerText.text = "";
+        taskTimerObj.SetActive(false);
+
+        if (taskNum == 1)
+        {
+            StartCoroutine(LoadTask2());
+            // next1.SetActive(true);
+        }
+        else if (taskNum == 2)
+        {
+            StartCoroutine(LoadTask3());
+            // next2.SetActive(true);
+        }
+        else if (taskNum == 3)
+        {
+            StartCoroutine(LoadTask4());
+            // next3.SetActive(true);
+        }
+        else if (taskNum == 4)
+        {
+            // next4.SetActive(true);
+            LevelCompleted();
+        }
+
+    }
+    public void OnLevelEndNextClicked()
+    {
+        SceneManager.LoadScene(3);
+        //Application.Quit();
+    }
+
+    public void OnBackBtnClicked()
+    {
+        GameManager.Instance.OnBackBtnClicked();
+    }
+
+    public void ShowScore()
+    {
+        level1ScoreObj.GetComponentInChildren<TMP_Text>().text = ((GameManager.Instance.Level1Score / GameManager.Instance.Level1TotalScore) * 100).ToString("0.00") + "%";
+        level1ScoreObj.gameObject.SetActive(true);
+
+        level2ScoreObj.GetComponentInChildren<TMP_Text>().text = ((GameManager.Instance.Level2Score / GameManager.Instance.Level2TotalScore) * 100).ToString("0.00") + "%";
+        level2ScoreObj.gameObject.SetActive(true);
+
+        // level3ScoreObj.GetComponentInChildren<TMP_Text>().text = ((GameManager.Instance.Level3Score / GameManager.Instance.Level3TotalScore) * 100).ToString("0.00") + "%";
+        // level3ScoreObj.gameObject.SetActive(true);
+
+        // level4ScoreObj.GetComponentInChildren<TMP_Text>().text = ((GameManager.Instance.Level4Score / GameManager.Instance.Level4TotalScore) * 100).ToString("0.00") + "%";
+        // level4ScoreObj.gameObject.SetActive(true);
+
+        // level5ScoreObj.GetComponentInChildren<TMP_Text>().text = ((GameManager.Instance.Level5Score / GameManager.Instance.Level5TotalScore) * 100).ToString("0.00") + "%";
+        // level5ScoreObj.gameObject.SetActive(true);
+    }
+
+    public void ResetAll()
+    {
+        GameManager.Instance.ResetScores();
+        SceneManager.LoadScene(0);
+    }
+}
