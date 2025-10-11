@@ -11,12 +11,12 @@ public class Level1Controller : MonoBehaviour
 
     [Header("Progress Meter")]
     public GameObject progressMeter;
-    public GameObject step1, step2, step3, step4, step5;
-    public Image step1Img, step2Img, step3Img, step4Img, step5Img;
+    public GameObject step1, step2, step3, step4, step5, step6;
+    public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5;
+    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5, task6Promt, task6;
 
     [Header("Hint Detectors")]
     public GameObject[] rights;
@@ -24,7 +24,7 @@ public class Level1Controller : MonoBehaviour
     public GameObject[] points;
 
     [Header("Next Buttons")]
-    public GameObject next1, next2, next3, next4, next5;
+    public GameObject next1, next2, next3, next4, next5, next6;
 
     [Header("Score Objects")]
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
@@ -33,9 +33,9 @@ public class Level1Controller : MonoBehaviour
 
     [Header("Task Count")]
 
-    [SerializeField] int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount;
-    int task1CompletedCount, task2CompletedCount, task3CompletedCount, task4CompletedCount, task5CompletedCount;
-    float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints;
+    [SerializeField] int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount;
+    int task1CompletedCount, task2CompletedCount, task3CompletedCount, task4CompletedCount, task5CompletedCount, task6CompletedCount;
+    float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints, task6NegativePoints;
 
     public TMP_Text timerText;
     public GameObject taskTimerObj;
@@ -43,7 +43,7 @@ public class Level1Controller : MonoBehaviour
 
     public GameObject goodJobPanel, backBtn;
 
-    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, deactivateCurrentTasks = false;
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false, deactivateCurrentTasks = false;
 
     void Start()
     {
@@ -71,7 +71,6 @@ public class Level1Controller : MonoBehaviour
         // next3.SetActive(false);
         // next4.SetActive(false);
 
-        //
 
         if(GameManager.Instance.GameStarted)
         {
@@ -306,6 +305,58 @@ public class Level1Controller : MonoBehaviour
         _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
     }
 
+    public IEnumerator LoadTask6()
+    {
+        if (task6Loaded)
+        {
+            yield break;
+        }
+        task6Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        task5.SetActive(false);
+        //progressMeter.SetActive(false);
+        task6Promt.SetActive(true);
+
+        if (task5CompletedCount == 0)
+            step5Img.sprite = red;
+        else if (task5NegativePoints > 0)
+            step5Img.sprite = yellow;
+        else if (task5CompletedCount == task5TasksCount)
+            step5Img.sprite = green;
+        else
+            step5Img.sprite = yellow;
+
+        step5.SetActive(true);
+        progressMeter.SetActive(true);
+    }
+
+    #endregion
+
+    #region Task 6
+
+    public void OnTask6NextClicked()
+    {
+        TaskCountStarsManager.Instance.ClearStars();
+        Task6();
+    }
+    void Task6()
+    {
+        task6Promt.SetActive(false);
+        task6.SetActive(true);
+        TaskCountStarsManager.Instance.InitiateStars(task6TasksCount);
+        deactivateCurrentTasks = false;
+
+        taskNum = 6;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task6TasksCount * 5));
+    }
+    
+
     #endregion
 
     #region Hints Handling
@@ -332,6 +383,8 @@ public class Level1Controller : MonoBehaviour
             task4CompletedCount++;
         if (taskNum == 5)
             task5CompletedCount++;
+        if (taskNum == 6)
+            task6CompletedCount++;
 
         GameManager.Instance.Level1Score++;
 
@@ -366,6 +419,8 @@ public class Level1Controller : MonoBehaviour
             task4NegativePoints += 0.25f;
         if (taskNum == 5)
             task5NegativePoints += 0.25f;
+        if (taskNum == 6)
+            task6NegativePoints += 0.25f;
 
         wrong.SetActive(true);
         point.SetActive(true);
@@ -400,8 +455,8 @@ public class Level1Controller : MonoBehaviour
     IEnumerator LoadNextTask()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log("Task 5 Completed");
-        //StartCoroutine(LoadTask6());
+        //Debug.Log("Task 5 Completed");
+        StartCoroutine(LoadTask6());
     }
 
     IEnumerator WaitForRightWrong(GameObject obj)
@@ -438,8 +493,23 @@ public class Level1Controller : MonoBehaviour
         else if (taskNum == 5 && task5CompletedCount == task5TasksCount)
         {
             // goodJobPanel.SetActive(true);
-            LevelCompleted();
+            StartCoroutine(LoadTask6());
             // next4.SetActive(true);
+        }
+        else if (taskNum == 6 && task6CompletedCount == task6TasksCount)
+        {
+            if (task6CompletedCount == 0)
+                step6Img.sprite = red;
+            else if (task6NegativePoints > 0)
+                step6Img.sprite = yellow;
+            else if (task6CompletedCount == task6TasksCount)
+                step6Img.sprite = green;
+            else
+                step6Img.sprite = yellow;
+
+            step6.SetActive(true);
+            progressMeter.SetActive(true);
+            LevelCompleted();
         }
     }
 
@@ -476,6 +546,10 @@ public class Level1Controller : MonoBehaviour
         {
             StartCoroutine(LoadTask5());
         }
+        else if (taskNum == 5)
+        {
+            StartCoroutine(LoadTask6());
+        }
     }
 
     public void LevelCompleted()
@@ -491,20 +565,20 @@ public class Level1Controller : MonoBehaviour
     IEnumerator WaitForLevelCompletion()
     {
         TaskCountStarsManager.Instance.ClearStars();
-        if (task4CompletedCount == 0)
-            step4Img.sprite = red;
-        else if (task4NegativePoints > 0)
-            step4Img.sprite = yellow;
-        else if (task4CompletedCount == task4TasksCount)
-            step4Img.sprite = green;
+        if (task6CompletedCount == 0)
+            step6Img.sprite = red;
+        else if (task6NegativePoints > 0)
+            step6Img.sprite = yellow;
+        else if (task6CompletedCount == task6TasksCount)
+            step6Img.sprite = green;
         else
-            step4Img.sprite = yellow;
+            step6Img.sprite = yellow;
 
-        step4.SetActive(true);
+        step6.SetActive(true);
 
         yield return new WaitForSeconds(2f);
         goodJobPanel.SetActive(false);
-        task4.SetActive(false);
+        task6.SetActive(false);
         progressMeter.SetActive(false);
         levelEndPanel.SetActive(true);
     }
@@ -542,11 +616,22 @@ public class Level1Controller : MonoBehaviour
         }
         else if (taskNum == 4)
         {
-            LevelCompleted();
-            next4.SetActive(true);
+            StartCoroutine(LoadTask5());
+            // next3.SetActive(true);
             deactivateCurrentTasks = true;
         }
-
+        else if (taskNum == 5)
+        {
+            StartCoroutine(LoadTask6());
+            // next3.SetActive(true);
+            deactivateCurrentTasks = true;
+        }
+        else if (taskNum == 6)
+        {
+            LevelCompleted();
+            next6.SetActive(true);
+            deactivateCurrentTasks = true;
+        }
     }
 
     public void OnNextClicked()
