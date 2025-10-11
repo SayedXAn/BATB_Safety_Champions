@@ -37,9 +37,9 @@ public class Level2Controller : MonoBehaviour
     [HideInInspector]
     public int taskNum;
     [HideInInspector]
-    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount;
-    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount;
-    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints;
+    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount, task6HintCount, task7HintCount, task8HintCount;
+    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount, task7TasksCount, task8TasksCount;
+    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints, task6NegativePoints, task7NegativePoints, task8NegativePoints;
 
     public int task3DropCount = 0;
 
@@ -57,6 +57,9 @@ public class Level2Controller : MonoBehaviour
 
     bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false, task7Loaded = false, task8Loaded = false, deactivateCurrentTasks = false;
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
+
+    [Header("DropDowns")]
+    public TMP_Dropdown task6DropDown, task7DropDown;
 
     void Start()
     {
@@ -541,6 +544,53 @@ public class Level2Controller : MonoBehaviour
     }
     #endregion
 
+
+    #region Task 7
+
+    public void OnTask7NextClicked()
+    {
+        task7Promt.SetActive(false);
+        task7.SetActive(true);
+
+        taskNum = 7;
+        deactivateCurrentTasks = false;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task7TasksCount * 5));
+        TaskCountStarsManager.Instance.InitiateStars(task7TasksCount);
+    }
+    IEnumerator LoadTask7(float waitTime)
+    {
+        // taskTimerObj.SetActive(false);
+        if (task7Loaded)
+        {
+            yield break;
+        }
+
+        task7Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+        //task7EndPanel.SetActive(true);
+        if (task6HintCount > 0 && task6NegativePoints > 0)
+            step6Img.sprite = yellow;
+        else if (task6HintCount == task6TasksCount)
+            step6Img.sprite = green;
+        else if (task6HintCount == 0)
+            step6Img.sprite = red;
+        else
+            step6Img.sprite = yellow;
+
+        step6Img.gameObject.SetActive(true);
+
+        Debug.Log("Task 7 is loading");
+        yield return new WaitForSeconds(waitTime);
+
+        // goodJobPanel.SetActive(false);
+        task6.SetActive(false);
+        task7Promt.SetActive(true);
+    }
+    #endregion
+
     #region Hints Handling
     public void OnRightHintClicked(GameObject go)
     {
@@ -605,6 +655,48 @@ public class Level2Controller : MonoBehaviour
         point.SetActive(true);
 
         StartCoroutine(WaitForRightWrong(go));
+    }
+
+    public void DropDownAnswerCheck(int taskNum)
+    {
+        //Debug.Log("value" + task6DropDown.value); //value 0, 1, 2 Correct is 2
+        if(taskNum == 6 )
+        {
+            if(task6DropDown.value == 2)
+            {
+                //right
+                if (AudioManager.instance != null)
+                    AudioManager.instance.PlaySound("right");
+                task6HintCount++;
+                TaskCountStarsManager.Instance.FillStar();
+            }
+            else
+            {
+                if (AudioManager.instance != null)
+                    AudioManager.instance.PlaySound("wrong");
+                task6NegativePoints += 0.25f;
+                GameManager.Instance.Level2Score -= 0.25f;
+            }
+        }
+        else if(taskNum == 7 )
+        {
+            if (task6DropDown.value == 2)
+            {
+                //right
+                if (AudioManager.instance != null)
+                    AudioManager.instance.PlaySound("right");
+                task7HintCount++;
+                TaskCountStarsManager.Instance.FillStar();
+            }
+            else
+            {
+                if (AudioManager.instance != null)
+                    AudioManager.instance.PlaySound("wrong");
+                task7NegativePoints += 0.25f;
+                GameManager.Instance.Level2Score -= 0.25f;
+            }
+        }
+
     }
 
     public void OnWrongHintClicked(GameObject go)
@@ -714,10 +806,10 @@ public class Level2Controller : MonoBehaviour
         {
             StartCoroutine(LoadTask6(2f));
         }
-        //else if (taskNum == 6)
-        //{
-        //    StartCoroutine(LoadTask7(1));
-        //}
+        else if (taskNum == 6)
+        {
+            StartCoroutine(LoadTask7(2));
+        }
         //else if (taskNum == 7)
         //{
         //    StartCoroutine(LoadTask8(1));
@@ -807,6 +899,14 @@ public class Level2Controller : MonoBehaviour
             // next5.SetActive(true);
             //LevelCompleted();]
             StartCoroutine(LoadTask6(2f));
+        }
+
+        else if (taskNum == 6)
+        {
+            deactivateCurrentTasks = true;
+            // next5.SetActive(true);
+            //LevelCompleted();]
+            StartCoroutine(LoadTask7(2f));
         }
 
     }
