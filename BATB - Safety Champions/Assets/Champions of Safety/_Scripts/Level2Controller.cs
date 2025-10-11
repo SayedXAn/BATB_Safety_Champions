@@ -10,8 +10,8 @@ public class Level2Controller : MonoBehaviour
 
     [Header("Progress Meter")]
     public GameObject progressMeter;
-    public GameObject step1, step2, step3, step4, step5;
-    public Image step1Img, step2Img, step3Img, step4Img, step5Img;
+    public GameObject step1, step2, step3, step4, step5, step6, step7, step8;
+    public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img, step7Img, step8Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
@@ -19,7 +19,8 @@ public class Level2Controller : MonoBehaviour
         task2Start,task2FadedPromt, task2Promt, task2, task2End,
         task3Start, task3Promt, task3,
         task4Promt1, task4Promt2, task4Promt3, task4,
-        task5Promt, task5, task5EndPanel;
+        task5Promt, task5, task5EndPanel, task6Promt, task6,
+        task7Promt, task7, task8Promt, task8;
 
     public Sprite closeDoorImg;
     public Button task2Next;
@@ -37,7 +38,7 @@ public class Level2Controller : MonoBehaviour
     public int taskNum;
     [HideInInspector]
     public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount;
-    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount;
+    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount;
     public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints;
 
     public int task3DropCount = 0;
@@ -54,7 +55,7 @@ public class Level2Controller : MonoBehaviour
 
     public GameObject goodJobPanel, backBtn;
 
-    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, deactivateCurrentTasks = false;
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false, task7Loaded = false, task8Loaded = false, deactivateCurrentTasks = false;
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
 
     void Start()
@@ -458,16 +459,6 @@ public class Level2Controller : MonoBehaviour
         taskTimerObj.SetActive(false);
         TaskCountStarsManager.Instance.ClearStars();
 
-        Debug.Log("Task 4 hint count: " + task4HintCount);
-        // if (task4HintCount == 0)
-        //     step4Img.sprite = red;
-        // else if (task4HintCount > 0 && task4HintCount < 3)
-        //     step4Img.sprite = yellow;
-        // else if (task4HintCount == 3)
-        // {
-        //     step4Img.sprite = green;
-        //     goodJobPanel.SetActive(true);
-        // }
         if (task4HintCount > 0 && task4NegativePoints > 0)
             step4Img.sprite = yellow;
         else if (task4HintCount == task4TasksCount)
@@ -502,6 +493,52 @@ public class Level2Controller : MonoBehaviour
         TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
     }
 
+    #endregion
+
+    #region Task 6
+
+    public void OnTask6NextClicked()
+    {
+        task6Promt.SetActive(false);
+        task6.SetActive(true);
+
+        taskNum = 6;
+        deactivateCurrentTasks = false;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task6TasksCount * 5));
+        TaskCountStarsManager.Instance.InitiateStars(task6TasksCount);
+    }
+    IEnumerator LoadTask6(float waitTime)
+    {
+        // taskTimerObj.SetActive(false);
+        if (task6Loaded)
+        {
+            yield break;
+        }
+
+        task6Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+        task5EndPanel.SetActive(true);
+        if (task5HintCount > 0 && task5NegativePoints > 0)
+            step5Img.sprite = yellow;
+        else if (task5HintCount == task5TasksCount)
+            step5Img.sprite = green;
+        else if (task5HintCount == 0)
+            step5Img.sprite = red;
+        else
+            step5Img.sprite = yellow;
+
+        step5Img.gameObject.SetActive(true);
+
+        Debug.Log("Task 6 is loading");
+        yield return new WaitForSeconds(waitTime);
+
+        // goodJobPanel.SetActive(false);
+        task5.SetActive(false);
+        task6Promt.SetActive(true);
+    }
     #endregion
 
     #region Hints Handling
@@ -634,7 +671,8 @@ public class Level2Controller : MonoBehaviour
         else if (taskNum == 4 && task4HintCount == task4TasksCount)
             LoadTask5(1);
         else if (taskNum == 5 && task5HintCount == task5TasksCount)
-            LevelCompleted();
+            //LevelCompleted();
+            StartCoroutine(LoadTask6(2));
     }
 
     #endregion
@@ -672,6 +710,19 @@ public class Level2Controller : MonoBehaviour
         {
             StartCoroutine(LoadTask5(0));
         }
+        else if (taskNum == 5)
+        {
+            StartCoroutine(LoadTask6(2f));
+        }
+        //else if (taskNum == 6)
+        //{
+        //    StartCoroutine(LoadTask7(1));
+        //}
+        //else if (taskNum == 7)
+        //{
+        //    StartCoroutine(LoadTask8(1));
+        //}
+
     }
 
     public void LevelCompleted()
@@ -690,15 +741,6 @@ public class Level2Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         task5EndPanel.SetActive(true);
-        // if (task5HintCount == 0)
-        //     step5Img.sprite = red;
-        // else if (task5HintCount == 2)
-        // {
-        //     step5Img.sprite = green;
-        //     goodJobPanel.SetActive(true);
-        // }
-        // else
-        //     step5Img.sprite = yellow;
         if (task5HintCount > 0 && task5NegativePoints > 0)
             step5Img.sprite = yellow;
         else if (task5HintCount == task5TasksCount)
@@ -763,7 +805,8 @@ public class Level2Controller : MonoBehaviour
         {
             deactivateCurrentTasks = true;
             // next5.SetActive(true);
-            LevelCompleted();
+            //LevelCompleted();]
+            StartCoroutine(LoadTask6(2f));
         }
 
     }
