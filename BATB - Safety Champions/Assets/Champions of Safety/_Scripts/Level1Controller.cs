@@ -11,12 +11,12 @@ public class Level1Controller : MonoBehaviour
 
     [Header("Progress Meter")]
     public GameObject progressMeter;
-    public GameObject step1, step2, step3, step4;
-    public Image step1Img, step2Img, step3Img, step4Img;
+    public GameObject step1, step2, step3, step4, step5;
+    public Image step1Img, step2Img, step3Img, step4Img, step5Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4;
+    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5;
 
     [Header("Hint Detectors")]
     public GameObject[] rights;
@@ -24,16 +24,18 @@ public class Level1Controller : MonoBehaviour
     public GameObject[] points;
 
     [Header("Next Buttons")]
-    public GameObject next1, next2, next3, next4;
+    public GameObject next1, next2, next3, next4, next5;
 
     [Header("Score Objects")]
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
 
     int taskNum;
 
-    [SerializeField] int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount;
-    int task1CompletedCount, task2CompletedCount, task3CompletedCount, task4CompletedCount;
-    float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints;
+    [Header("Task Count")]
+
+    [SerializeField] int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount;
+    int task1CompletedCount, task2CompletedCount, task3CompletedCount, task4CompletedCount, task5CompletedCount;
+    float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints;
 
     public TMP_Text timerText;
     public GameObject taskTimerObj;
@@ -41,7 +43,7 @@ public class Level1Controller : MonoBehaviour
 
     public GameObject goodJobPanel, backBtn;
 
-    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, deactivateCurrentTasks = false;
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, deactivateCurrentTasks = false;
 
     void Start()
     {
@@ -253,6 +255,56 @@ public class Level1Controller : MonoBehaviour
         taskNum = 4;
         _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task4TasksCount * 5));
     }
+    public IEnumerator LoadTask5()
+    {
+        if (task5Loaded)
+        {
+            yield break;
+        }
+        task5Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        task4.SetActive(false);
+        //progressMeter.SetActive(false);
+        task5Promt.SetActive(true);
+
+        if (task4CompletedCount == 0)
+            step4Img.sprite = red;
+        else if (task4NegativePoints > 0)
+            step4Img.sprite = yellow;
+        else if (task4CompletedCount == task4TasksCount)
+            step4Img.sprite = green;
+        else
+            step4Img.sprite = yellow;
+
+        step4.SetActive(true);
+        progressMeter.SetActive(true);
+    }
+
+    #endregion
+
+    #region Task 5
+
+    public void OnTask5NextClicked()
+    {
+        TaskCountStarsManager.Instance.ClearStars();
+        Task5();
+    }
+    void Task5()
+    {
+        task5Promt.SetActive(false);
+        task5.SetActive(true);
+        TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
+        deactivateCurrentTasks = false;
+
+        taskNum = 5;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+    }
 
     #endregion
 
@@ -278,6 +330,8 @@ public class Level1Controller : MonoBehaviour
             task3CompletedCount++;
         if (taskNum == 4)
             task4CompletedCount++;
+        if (taskNum == 5)
+            task5CompletedCount++;
 
         GameManager.Instance.Level1Score++;
 
@@ -310,11 +364,46 @@ public class Level1Controller : MonoBehaviour
             task3NegativePoints += 0.25f;
         if (taskNum == 4)
             task4NegativePoints += 0.25f;
+        if (taskNum == 5)
+            task5NegativePoints += 0.25f;
 
         wrong.SetActive(true);
         point.SetActive(true);
         StartCoroutine(WaitForRightWrong(obj));
     }
+
+    public void OnQuestionAnswerSelect(bool correct)
+    {
+        if (deactivateCurrentTasks)
+        {
+            return;
+        }
+        if(correct)
+        {
+            AudioManager.instance.PlaySound("right");
+            TaskCountStarsManager.Instance.FillStar();
+            if (taskNum == 5)
+                task5CompletedCount++;
+
+            GameManager.Instance.Level1Score++;            
+        }
+        else
+        {
+            AudioManager.instance.PlaySound("wrong");
+            GameManager.Instance.Level1Score -= 0.25f;
+
+            if (taskNum == 5)
+                task5NegativePoints += 0.25f;
+        }
+        StartCoroutine(LoadNextTask());
+    }
+    IEnumerator LoadNextTask()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Task 5 Completed");
+        //StartCoroutine(LoadTask6());
+    }
+
     IEnumerator WaitForRightWrong(GameObject obj)
     {
         yield return new WaitForSeconds(2f);
@@ -341,6 +430,12 @@ public class Level1Controller : MonoBehaviour
             // next3.SetActive(true);
         }
         else if (taskNum == 4 && task4CompletedCount == task4TasksCount)
+        {
+            // goodJobPanel.SetActive(true);
+            StartCoroutine(LoadTask5());
+            // next4.SetActive(true);
+        }
+        else if (taskNum == 5 && task5CompletedCount == task5TasksCount)
         {
             // goodJobPanel.SetActive(true);
             LevelCompleted();
@@ -376,6 +471,10 @@ public class Level1Controller : MonoBehaviour
         else if (taskNum == 3)
         {
             StartCoroutine(LoadTask4());
+        }
+        else if (taskNum == 4)
+        {
+            StartCoroutine(LoadTask5());
         }
     }
 
