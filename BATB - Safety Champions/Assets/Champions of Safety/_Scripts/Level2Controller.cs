@@ -945,4 +945,16 @@ public class Level2Controller : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void DragDropOutput(int itemID, int slotID)
+    {
+        if(itemID == slotID)
+        {
+            Debug.Log("Milseeeee");
+        }
+        else
+        {
+            Debug.Log("Mile nai");
+        }
+    }
+
 }
