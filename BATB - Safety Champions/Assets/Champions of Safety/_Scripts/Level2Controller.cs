@@ -10,8 +10,8 @@ public class Level2Controller : MonoBehaviour
 
     [Header("Progress Meter")]
     public GameObject progressMeter;
-    public GameObject step1, step2, step3, step4, step5, step6, step7, step8;
-    public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img, step7Img, step8Img;
+    public GameObject step1, step2, step3, step4, step5, step6, step7, step8, step9;
+    public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img, step7Img, step8Img, step9Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
@@ -20,7 +20,7 @@ public class Level2Controller : MonoBehaviour
         task3Start, task3Promt, task3,
         task4Promt1, task4Promt2, task4Promt3, task4,
         task5Promt, task5, task5EndPanel, task6Promt, task6,
-        task7Promt, task7, task8Promt, task8;
+        task7Promt, task7, task8Promt, task8, task9Promt, task9;
 
     public Sprite closeDoorImg;
     public Button task2Next;
@@ -37,9 +37,9 @@ public class Level2Controller : MonoBehaviour
     [HideInInspector]
     public int taskNum;
     [HideInInspector]
-    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount, task6HintCount, task7HintCount, task8HintCount;
-    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount, task7TasksCount, task8TasksCount;
-    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints, task6NegativePoints, task7NegativePoints, task8NegativePoints;
+    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount, task6HintCount, task7HintCount, task8HintCount, task9HintCount;
+    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount, task7TasksCount, task8TasksCount, task9TasksCount;
+    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints, task6NegativePoints, task7NegativePoints, task8NegativePoints, task9NegativePoints;
 
     public int task3DropCount = 0;
 
@@ -55,11 +55,13 @@ public class Level2Controller : MonoBehaviour
 
     public GameObject goodJobPanel, backBtn;
 
-    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false, task7Loaded = false, task8Loaded = false, deactivateCurrentTasks = false;
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false,
+        task7Loaded = false, task8Loaded = false, task9Loaded = false, deactivateCurrentTasks = false;
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
 
     [Header("DropDowns")]
     public TMP_Dropdown task6DropDown, task7DropDown;
+    private int dragDroppedItemCount = 0;
 
     void Start()
     {
@@ -70,12 +72,20 @@ public class Level2Controller : MonoBehaviour
         task3HintCount = 0;
         task4HintCount = 0;
         task5HintCount = 0;
+        task6HintCount = 0;
+        task7HintCount = 0;
+        task8HintCount = 0;
+        task9HintCount = 0;
 
         // task1Loaded = false;
         task2Loaded = false;
         task3Loaded = false;
         task4Loaded = false;
         task5Loaded = false;
+        task6Loaded = false;
+        task7Loaded = false;
+        task8Loaded = false;
+        task9Loaded = false;
 
         // next1.SetActive(false);
         // next2.SetActive(false);
@@ -591,6 +601,98 @@ public class Level2Controller : MonoBehaviour
     }
     #endregion
 
+    #region Task 8
+
+    public void OnTask8NextClicked()
+    {
+        task8Promt.SetActive(false);
+        task8.SetActive(true);
+
+        taskNum = 8;
+        deactivateCurrentTasks = false;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task8TasksCount * 5));
+        TaskCountStarsManager.Instance.InitiateStars(task8TasksCount);
+    }
+    IEnumerator LoadTask8(float waitTime)
+    {
+        // taskTimerObj.SetActive(false);
+        if (task8Loaded)
+        {
+            yield break;
+        }
+
+        task8Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+        //task7EndPanel.SetActive(true);
+        if (task7HintCount > 0 && task7NegativePoints > 0)
+            step7Img.sprite = yellow;
+        else if (task7HintCount == task7TasksCount)
+            step7Img.sprite = green;
+        else if (task7HintCount == 0)
+            step7Img.sprite = red;
+        else
+            step7Img.sprite = yellow;
+
+        step7Img.gameObject.SetActive(true);
+
+        Debug.Log("Task 8 is loading");
+        yield return new WaitForSeconds(waitTime);
+
+        // goodJobPanel.SetActive(false);
+        task7.SetActive(false);
+        task8Promt.SetActive(true);
+    }
+    #endregion
+
+    #region Task 9
+
+    public void OnTask9NextClicked()
+    {
+        task9Promt.SetActive(false);
+        task9.SetActive(true);
+
+        taskNum = 9;
+        deactivateCurrentTasks = false;
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task9TasksCount * 5));
+        TaskCountStarsManager.Instance.InitiateStars(task9TasksCount);
+    }
+    IEnumerator LoadTask9(float waitTime)
+    {
+        // taskTimerObj.SetActive(false);
+        if (task9Loaded)
+        {
+            yield break;
+        }
+
+        task9Loaded = true;
+
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
+        //task7EndPanel.SetActive(true);
+        if (task8HintCount > 0 && task8NegativePoints > 0)
+            step8Img.sprite = yellow;
+        else if (task8HintCount == task8TasksCount)
+            step8Img.sprite = green;
+        else if (task8HintCount == 0)
+            step8Img.sprite = red;
+        else
+            step8Img.sprite = yellow;
+
+        step8Img.gameObject.SetActive(true);
+
+        Debug.Log("Task 9 is loading");
+        yield return new WaitForSeconds(waitTime);
+
+        // goodJobPanel.SetActive(false);
+        task8.SetActive(false);
+        task9Promt.SetActive(true);
+    }
+    #endregion
+
     #region Hints Handling
     public void OnRightHintClicked(GameObject go)
     {
@@ -668,6 +770,7 @@ public class Level2Controller : MonoBehaviour
                 if (AudioManager.instance != null)
                     AudioManager.instance.PlaySound("right");
                 task6HintCount++;
+                GameManager.Instance.Level2Score++;
                 TaskCountStarsManager.Instance.FillStar();
             }
             else
@@ -680,12 +783,13 @@ public class Level2Controller : MonoBehaviour
         }
         else if(taskNum == 7 )
         {
-            if (task6DropDown.value == 2)
+            if (task7DropDown.value == 2)
             {
                 //right
                 if (AudioManager.instance != null)
                     AudioManager.instance.PlaySound("right");
                 task7HintCount++;
+                GameManager.Instance.Level2Score++;
                 TaskCountStarsManager.Instance.FillStar();
             }
             else
@@ -767,6 +871,32 @@ public class Level2Controller : MonoBehaviour
             StartCoroutine(LoadTask6(2));
     }
 
+    public void OnQuestionAnswerSelect(bool correct)
+    {
+        if (deactivateCurrentTasks)
+        {
+            return;
+        }
+        if (correct)
+        {
+            AudioManager.instance.PlaySound("right");
+            TaskCountStarsManager.Instance.FillStar();
+            if (taskNum == 9)
+                task9HintCount++;
+
+            GameManager.Instance.Level2Score++;
+        }
+        else
+        {
+            AudioManager.instance.PlaySound("wrong");
+            GameManager.Instance.Level1Score -= 0.25f;
+
+            if (taskNum == 9)
+                task9NegativePoints += 0.25f;
+        }
+        LevelCompleted();
+    }
+
     #endregion
 
     public void OnMapButtonClicked()
@@ -808,13 +938,16 @@ public class Level2Controller : MonoBehaviour
         }
         else if (taskNum == 6)
         {
-            StartCoroutine(LoadTask7(2));
+            StartCoroutine(LoadTask7(2f));
         }
-        //else if (taskNum == 7)
-        //{
-        //    StartCoroutine(LoadTask8(1));
-        //}
-
+        else if (taskNum == 7)
+        {
+            StartCoroutine(LoadTask8(2f));
+        }
+        else if (taskNum == 8)
+        {
+            StartCoroutine(LoadTask9(2f));
+        }
     }
 
     public void LevelCompleted()
@@ -832,21 +965,21 @@ public class Level2Controller : MonoBehaviour
     IEnumerator WaitForLevelCompletion()
     {
         yield return new WaitForSeconds(1f);
-        task5EndPanel.SetActive(true);
-        if (task5HintCount > 0 && task5NegativePoints > 0)
-            step5Img.sprite = yellow;
-        else if (task5HintCount == task5TasksCount)
-            step5Img.sprite = green;
-        else if (task5HintCount == 0)
-            step5Img.sprite = red;
+        //task9EndPanel.SetActive(true);
+        if (task9HintCount > 0 && task9NegativePoints > 0)
+            step9Img.sprite = yellow;
+        else if (task9HintCount == task9TasksCount)
+            step9Img.sprite = green;
+        else if (task9HintCount == 0)
+            step9Img.sprite = red;
         else
-            step5Img.sprite = yellow;
+            step9Img.sprite = yellow;
 
-        step5.SetActive(true);
+        step9.SetActive(true);
 
         yield return new WaitForSeconds(2f);
         goodJobPanel.SetActive(false);
-        task5.SetActive(false);
+        task9.SetActive(false);
         progressMeter.SetActive(false);
         levelEndPanel.SetActive(true);
     }
@@ -908,6 +1041,20 @@ public class Level2Controller : MonoBehaviour
             //LevelCompleted();]
             StartCoroutine(LoadTask7(2f));
         }
+        else if (taskNum == 7)
+        {
+            deactivateCurrentTasks = true;
+            // next5.SetActive(true);
+            //LevelCompleted();]
+            StartCoroutine(LoadTask8(2f));
+        }
+        else if (taskNum == 8)
+        {
+            deactivateCurrentTasks = true;
+            // next5.SetActive(true);
+            //LevelCompleted();]
+            StartCoroutine(LoadTask9(2f));
+        }
 
     }
     public void OnNextClicked()
@@ -945,15 +1092,30 @@ public class Level2Controller : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    
     public void DragDropOutput(int itemID, int slotID)
     {
+        dragDroppedItemCount++;
         if(itemID == slotID)
         {
             Debug.Log("Milseeeee");
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlaySound("right");
+            task8HintCount++;
+            GameManager.Instance.Level2Score++;
+            TaskCountStarsManager.Instance.FillStar();
         }
         else
         {
             Debug.Log("Mile nai");
+            if (AudioManager.instance != null)
+                AudioManager.instance.PlaySound("wrong");
+            task8NegativePoints += 0.25f;
+            GameManager.Instance.Level2Score -= 0.25f;
+        }
+        if(dragDroppedItemCount == 4)
+        {
+            StartCoroutine(LoadTask9(2));
         }
     }
 
