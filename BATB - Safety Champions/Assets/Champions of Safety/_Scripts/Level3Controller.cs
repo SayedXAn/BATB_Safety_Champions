@@ -10,8 +10,8 @@ public class Level3Controller : MonoBehaviour
 
     [Header("Progress Meter")]
     public GameObject progressMeter;
-    public GameObject step1, step2, step3, step4;
-    public Image step1Img, step2Img, step3Img, step4Img;
+    public GameObject step1, step2, step3, step4, step5, step6;
+    public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
@@ -394,6 +394,59 @@ public class Level3Controller : MonoBehaviour
 
     #endregion
 
+    #region Task 6  
+    public void OnTask6NextClicked()
+    {
+        StartCoroutine(LoadTask6());
+    }
+
+    IEnumerator LoadTask6()
+    {
+        if (task6Loaded)
+        {
+            yield break;
+        }
+
+        task6Loaded = true;
+        Debug.Log("Loading 6");
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+
+        TaskCountStarsManager.Instance.ClearStars();
+
+        //progressMeter.SetActive(false);
+
+        if (task5HintCount > 0 && task5NegativePoints > 0)
+        {
+            step5Img.sprite = yellow;
+        }
+        else if (task5HintCount == task5TasksCount)
+        {
+            step5Img.sprite = green;
+        }
+        else if (task5HintCount == 0)
+        {
+            step5Img.sprite = red;
+        }
+        else
+        {
+            step5Img.sprite = yellow;
+        }
+
+        step5.SetActive(true);
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        task6Promt.SetActive(false);
+        task6.SetActive(true);
+        progressMeter.SetActive(true);
+        taskNum = 6;
+        deactivateCurrentTasks = false;
+        TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+    }
+
+    #endregion
+
     #region Hints Handling
     public void OnRightHintClicked(GameObject go)
     {
@@ -518,6 +571,7 @@ public class Level3Controller : MonoBehaviour
                 deactivateCurrentTasks = true;
                 //StartCoroutine(WaitForLevelCompletion());
                 Debug.Log("Task 5 sesh");
+                StartCoroutine(LoadTask6());
             }
             yield break;
         }
@@ -567,7 +621,7 @@ public class Level3Controller : MonoBehaviour
         }
         else if (taskNum == 5)
         {
-            //StartCoroutine(LoadTask6());
+            StartCoroutine(LoadTask6());
         }
         else if (taskNum == 6)
         {
@@ -655,7 +709,7 @@ public class Level3Controller : MonoBehaviour
         }
         else if (taskNum == 5)
         {
-            //StartCoroutine(LoadTask6());
+            StartCoroutine(LoadTask6());
         }
         else if(taskNum == 6)
         {
