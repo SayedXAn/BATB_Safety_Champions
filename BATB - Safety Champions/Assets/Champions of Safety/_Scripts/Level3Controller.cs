@@ -15,10 +15,10 @@ public class Level3Controller : MonoBehaviour
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4;
+    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5, task6Promt, task6;
 
     [Header("Task End")]
-    public GameObject task1End, task2End, task3End, task4End;
+    public GameObject task1End, task2End, task3End, task4End, task5End, task6End;
 
 
     public Button task3Next;
@@ -33,11 +33,11 @@ public class Level3Controller : MonoBehaviour
     public int taskNum;
 
     [HideInInspector]
-    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount;
-    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount;
-    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints;
+    public int task1HintCount, task2HintCount, task3HintCount, task4HintCount, task5HintCount, task6HintCount;
+    public int task1TasksCount, task2TasksCount, task3TasksCount, task4TasksCount, task5TasksCount, task6TasksCount;
+    public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints, task5NegativePoints, task6NegativePoints;
     [Header("Next Buttons")]
-    public GameObject next1, next2, next3, next4;
+    public GameObject next1, next2, next3, next4, next5, next6;
 
     public Button option1Btn, option2Btn, option3Btn;
 
@@ -48,7 +48,7 @@ public class Level3Controller : MonoBehaviour
 
     public GameObject goodJobPanel, backBtn;
 
-    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, deactivateCurrentTasks = false;
+    bool task2Loaded = false, task3Loaded = false, task4Loaded = false, task5Loaded = false, task6Loaded = false, deactivateCurrentTasks = false;
 
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
 
@@ -60,10 +60,14 @@ public class Level3Controller : MonoBehaviour
         task2HintCount = 0;
         task3HintCount = 0;
         task4HintCount = 0;
+        task5HintCount = 0;
+        task6HintCount = 0;
 
         task2Loaded = false;
         task3Loaded = false;
         task4Loaded = false;
+        task5Loaded = false;
+        task6Loaded = false;
 
         // next1.SetActive(false);
         next2.SetActive(false);
@@ -337,6 +341,59 @@ public class Level3Controller : MonoBehaviour
 
     #endregion
 
+    #region Task 5   
+    public void OnTask5NextClicked()
+    {
+        StartCoroutine(LoadTask5());
+    }
+
+    IEnumerator LoadTask5()
+    {
+        if (task5Loaded)
+        {
+            yield break;
+        }
+
+        task5Loaded = true;
+        Debug.Log("Loading 5");
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+
+        TaskCountStarsManager.Instance.ClearStars();
+
+        //progressMeter.SetActive(false);
+
+        if (task4HintCount > 0 && task4NegativePoints > 0)
+        {
+            step4Img.sprite = yellow;
+        }
+        else if (task4HintCount == task4TasksCount)
+        {
+            step4Img.sprite = green;
+        }
+        else if (task4HintCount == 0)
+        {
+            step4Img.sprite = red;
+        }
+        else
+        {
+            step4Img.sprite = yellow;
+        }
+
+        step4.SetActive(true);
+        // yield return new WaitForSeconds(2f);
+        // goodJobPanel.SetActive(false);
+        task5Promt.SetActive(false);
+        task5.SetActive(true);
+        progressMeter.SetActive(true);
+        taskNum = 5;
+        deactivateCurrentTasks = false;
+        TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+    }
+
+    #endregion
+
     #region Hints Handling
     public void OnRightHintClicked(GameObject go)
     {
@@ -358,6 +415,10 @@ public class Level3Controller : MonoBehaviour
             task3HintCount++;
         if (taskNum == 4)
             task4HintCount++;
+        if (taskNum == 5)
+            task5HintCount++;
+        if (taskNum == 6)
+            task6HintCount++;
 
         GameManager.Instance.Level3Score += 1;
 
@@ -387,6 +448,10 @@ public class Level3Controller : MonoBehaviour
             task3NegativePoints += 0.25f;
         if (taskNum == 4)
             task4NegativePoints += 0.25f;
+        if (taskNum == 5)
+            task5NegativePoints += 0.25f;
+        if (taskNum == 6)
+            task6NegativePoints += 0.25f;
 
         GameManager.Instance.Level3Score -= 0.25f;
 
@@ -444,6 +509,19 @@ public class Level3Controller : MonoBehaviour
             yield break;
         }
 
+        if (taskNum == 5)
+        {
+            Debug.Log("Task 5 hint count: " + task5HintCount);
+            if (task5HintCount == task5TasksCount)
+            {
+                // next4.SetActive(true);
+                deactivateCurrentTasks = true;
+                //StartCoroutine(WaitForLevelCompletion());
+                Debug.Log("Task 5 sesh");
+            }
+            yield break;
+        }
+
         obj.SetActive(false);
 
         // if (taskNum == 1 && task1HintCount == 2)
@@ -484,6 +562,14 @@ public class Level3Controller : MonoBehaviour
             StartCoroutine(LoadTask4());
         }
         else if (taskNum == 4)
+        {
+            StartCoroutine(LoadTask5());
+        }
+        else if (taskNum == 5)
+        {
+            //StartCoroutine(LoadTask6());
+        }
+        else if (taskNum == 6)
         {
             LevelCompleted();
         }
@@ -564,6 +650,15 @@ public class Level3Controller : MonoBehaviour
         else if (taskNum == 4)
         {
             // next4.SetActive(true);
+            //LevelCompleted();
+            StartCoroutine(LoadTask5());
+        }
+        else if (taskNum == 5)
+        {
+            //StartCoroutine(LoadTask6());
+        }
+        else if(taskNum == 6)
+        {
             LevelCompleted();
         }
 
