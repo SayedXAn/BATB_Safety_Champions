@@ -1,0 +1,13 @@
+Font: Siyam Rupali ANSI  Style: Regular
+Point Size: 97   Padding: 0   SP/PD Ratio: 0.0%
+
+Characters included: 206/207
+Missing characters: 1
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+ID: 173	Hex: AD	Char [­]
+
+Characters excluded from packing:
+----------------------------------------
