@@ -517,7 +517,7 @@ public class Level2Controller : MonoBehaviour
 
         taskNum = 6;
         deactivateCurrentTasks = false;
-        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task6TasksCount * 5));
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(10 /*task6TasksCount * 5*/)); //time increased
         TaskCountStarsManager.Instance.InitiateStars(task6TasksCount);
     }
     IEnumerator LoadTask6(float waitTime)
@@ -564,7 +564,7 @@ public class Level2Controller : MonoBehaviour
 
         taskNum = 7;
         deactivateCurrentTasks = false;
-        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task7TasksCount * 5));
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(10 /*task7TasksCount * 5*/)); //time increased
         TaskCountStarsManager.Instance.InitiateStars(task7TasksCount);
     }
     IEnumerator LoadTask7(float waitTime)
@@ -764,7 +764,7 @@ public class Level2Controller : MonoBehaviour
         //Debug.Log("value" + task6DropDown.value); //value 0, 1, 2 Correct is 2
         if(taskNum == 6 )
         {
-            if(task6DropDown.value == 2)
+            if(task6DropDown.value == 1 /*2*/) //Not high, correct is medium
             {
                 //right
                 if (AudioManager.instance != null)

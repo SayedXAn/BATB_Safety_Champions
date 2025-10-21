@@ -302,7 +302,7 @@ public class Level1Controller : MonoBehaviour
         deactivateCurrentTasks = false;
 
         taskNum = 5;
-        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(/*task5TasksCount * 5*/ 10)); //The feedback was to increase time
     }
 
     public IEnumerator LoadTask6()
