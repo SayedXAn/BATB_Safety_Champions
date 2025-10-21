@@ -336,10 +336,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Kgc\xADv\u2021q\xDD c\xADv"
+  m_text: "Kgc\xF8v\u2021q\xDD"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd63d70cff8a16442ba287fd1fcc0a01, type: 2}
-  m_sharedMaterial: {fileID: -5753208596903694859, guid: bd63d70cff8a16442ba287fd1fcc0a01, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -632,7 +632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2112375111
 RectTransform:
   m_ObjectHideFlags: 0
