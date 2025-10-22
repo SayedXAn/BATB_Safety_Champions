@@ -115,7 +115,8 @@ public class Level2Controller : MonoBehaviour
 
         TaskCountStarsManager.Instance.InitiateStars(task1TasksCount);
         deactivateCurrentTasks = false;
-        task1EndInstruction.SetActive(true);
+        task1.SetActive(true);
+        //task1EndInstruction.SetActive(true);
         StartCoroutine(WaitForTask1Instruction());
 
         progressMeter.SetActive(true);
@@ -124,20 +125,24 @@ public class Level2Controller : MonoBehaviour
 
     }
 
-    public void OnTask1SubmitClicked()
-    {
-        task1.SetActive(false);
-        task1EndInstruction.SetActive(true);
+    //public void OnTask1SubmitClicked()
+    //{
+    //    task1.SetActive(false);
+    //    task1EndInstruction.SetActive(true);
 
-        StartCoroutine(WaitForTask1Instruction());
-    }
+    //    StartCoroutine(WaitForTask1Instruction());
+    //}
 
     IEnumerator WaitForTask1Instruction()
     {
         yield return new WaitForSeconds(1f);
-        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        if (_taskTimerCoroutineRef != null)
+        {
+            StopCoroutine(_taskTimerCoroutineRef);
+        }
+
         _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task1TasksCount * 5));
-        task1End.SetActive(true);
+        //task1End.SetActive(true);
         next1.SetActive(true);
     }
 
@@ -175,7 +180,8 @@ public class Level2Controller : MonoBehaviour
         yield return null;
         goodJobPanel.SetActive(false);
         task1EndPromt.SetActive(true);
-        StartCoroutine(LoadTask2(0f));
+        task1End.SetActive(true);
+        StartCoroutine(LoadTask2(1f));
     }
 
     public IEnumerator LoadTask2(float waitTime)
@@ -185,7 +191,7 @@ public class Level2Controller : MonoBehaviour
         {
             yield break;
         }
-
+        
         task2Loaded = true;
 
         if (task1HintCount > 0 && task1NegativePoints > 0)
@@ -201,10 +207,12 @@ public class Level2Controller : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
         rights[0].SetActive(false);
-        task1End.GetComponent<Image>().sprite = closeDoorImg;
+        
         yield return new WaitForSeconds(waitTime);
         Debug.Log("Task 2 is loading");
         task1.SetActive(false);
+        task1End.SetActive(false);
+        task1EndPromt.SetActive(false);
         //progressMeter.SetActive(false);
         task2Start.SetActive(true);
         yield return new WaitForSeconds(1f);
@@ -903,9 +911,10 @@ public class Level2Controller : MonoBehaviour
     {
         GameManager.Instance.Level2Score = 0;
         mapPanel.SetActive(false);
-        task1Start.SetActive(true);
+        task1Promt.SetActive(true);    
+        //task1Start.SetActive(true);
         // StartCoroutine(LoadTask1Prompt());
-        OnTask1NextClicked();
+        //OnTask1NextClicked();
         backBtn.SetActive(true);
     }
 

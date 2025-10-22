@@ -65,11 +65,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "wba\xA9vwiZ \xAF\u2019v\u2021b \u2020c\xD6m K\u2021i \u2020Mg \xEFi\u201C
-    Ki\u201Cb"
+  m_text: "wba\xA9vwiZ \xAF\u2019v\u2021b \u2020c\xD6m K\u2021i \u2020Mg \xEFi\xE6
+    Ki\xE6b"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fa7b2f5585895c14f9ec36acd90cf5ad, type: 2}
-  m_sharedMaterial: {fileID: 8022864336415948013, guid: fa7b2f5585895c14f9ec36acd90cf5ad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,13 +93,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
