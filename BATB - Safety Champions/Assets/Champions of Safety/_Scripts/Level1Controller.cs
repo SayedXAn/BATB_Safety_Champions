@@ -114,9 +114,9 @@ public class Level1Controller : MonoBehaviour
         
         taskTimerObj.SetActive(false);
 
-        // yield return new WaitForSeconds(2f);
-        // goodJobPanel.SetActive(false);
-        // Debug.Log("Task 2 is loading");
+        yield return new WaitForSeconds(2f);
+        goodJobPanel.SetActive(false);
+        Debug.Log("Task 2 is loading");
         task1.SetActive(false);
         //progressMeter.SetActive(false);
         task2Promt.SetActive(true);
@@ -216,8 +216,8 @@ public class Level1Controller : MonoBehaviour
         taskTimerObj.SetActive(false);
         TaskCountStarsManager.Instance.ClearStars();
 
-        // yield return new WaitForSeconds(2f);
-        // goodJobPanel.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        goodJobPanel.SetActive(false);
         task3.SetActive(false);
         //progressMeter.SetActive(false);
         task4Promt.SetActive(true);
@@ -266,8 +266,8 @@ public class Level1Controller : MonoBehaviour
         taskTimerObj.SetActive(false);
         TaskCountStarsManager.Instance.ClearStars();
 
-        // yield return new WaitForSeconds(2f);
-        // goodJobPanel.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        goodJobPanel.SetActive(false);
         task4.SetActive(false);
         //progressMeter.SetActive(false);
         task5Promt.SetActive(true);
@@ -317,8 +317,8 @@ public class Level1Controller : MonoBehaviour
         taskTimerObj.SetActive(false);
         TaskCountStarsManager.Instance.ClearStars();
 
-        // yield return new WaitForSeconds(2f);
-        // goodJobPanel.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        goodJobPanel.SetActive(false);
         task5.SetActive(false);
         //progressMeter.SetActive(false);
         task6Promt.SetActive(true);
