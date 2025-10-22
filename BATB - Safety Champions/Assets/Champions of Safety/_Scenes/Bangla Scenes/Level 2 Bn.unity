@@ -29558,7 +29558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5791329269308748465, guid: 8c3557c18835d5c4cae3af9e25015215, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21.000122
+      value: -20.999878
       objectReference: {fileID: 0}
     - target: {fileID: 5791329269308748465, guid: 8c3557c18835d5c4cae3af9e25015215, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -31981,8 +31981,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32028,7 +32028,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -32504,8 +32504,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32551,7 +32551,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -32957,8 +32957,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33004,7 +33004,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -33242,8 +33242,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33289,7 +33289,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -33731,8 +33731,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -33778,7 +33778,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

@@ -15752,7 +15752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &239355506509155744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15831,8 +15831,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15878,7 +15878,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -16689,7 +16689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2241943557858432929
 GameObject:
   m_ObjectHideFlags: 0
@@ -16707,7 +16707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2337365187135977888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16944,7 +16944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2786411918399852838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17061,8 +17061,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17339,8 +17339,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18469,8 +18469,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18516,7 +18516,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -18819,8 +18819,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 85.00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
-  m_sharedMaterial: {fileID: 6530464335796849595, guid: 0fe6a37f999361c4eb8b0fb12d3a2be8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18866,7 +18866,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
