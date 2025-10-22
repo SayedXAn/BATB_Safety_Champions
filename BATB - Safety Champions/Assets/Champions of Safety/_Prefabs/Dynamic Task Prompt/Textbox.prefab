@@ -141,14 +141,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Identify the
-
-    Non-Compliance
-
-'
+  m_text: "bb-Kgc\xF8v\u2021q\xDD \xB8\u2021jv wPw\xFDZ Ki\xE6b"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3d9504fdaf9a7704f9fa8df295a6ba97, type: 2}
-  m_sharedMaterial: {fileID: 5185779271285333120, guid: 3d9504fdaf9a7704f9fa8df295a6ba97, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e31d075a06e04044995e0a6346620dce, type: 2}
+  m_sharedMaterial: {fileID: 4497561167170138756, guid: e31d075a06e04044995e0a6346620dce, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
