@@ -1581,9 +1581,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3b91dc31394e50343bf68f906ccba376, type: 3}
     m_FontSize: 50
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 60
@@ -1593,9 +1593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '+1
-
-    No Helmet'
+  m_Text: "+1\n\u2020nj\u2021gU bvB"
 --- !u!222 &133161149
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4839,9 +4837,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3b91dc31394e50343bf68f906ccba376, type: 3}
     m_FontSize: 50
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 60
@@ -7473,9 +7471,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3b91dc31394e50343bf68f906ccba376, type: 3}
     m_FontSize: 50
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 60
@@ -7485,7 +7483,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "+1\nNo Safety Vest\r"
+  m_Text: "+1\n\u2020Kvb \u2020mdwU \u2020f\xF7 \u2020bB"
 --- !u!222 &719814815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8587,9 +8585,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3b91dc31394e50343bf68f906ccba376, type: 3}
     m_FontSize: 50
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 60
@@ -8599,7 +8597,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "+1\nLight on during daytime \r"
+  m_Text: "+1\nw`\u2021bi \u2020ejv\u2021ZI jvBU Ab Kiv"
 --- !u!222 &880676670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8792,7 +8790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902303500
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16161,9 +16159,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3b91dc31394e50343bf68f906ccba376, type: 3}
     m_FontSize: 50
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 60
@@ -16173,7 +16171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "+1\nArea not properly cordoned\r"
+  m_Text: "+1\nGwiqvwU wVKgZ \u2020ew\xF3Z/Ki\u2021Wvb Kiv \u2020bB\r"
 --- !u!222 &1600268365
 CanvasRenderer:
   m_ObjectHideFlags: 0
