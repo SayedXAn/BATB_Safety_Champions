@@ -736,6 +736,7 @@ public class Level2Controller : MonoBehaviour
             if (task2HintCount == task2TasksCount)
             {
                 deactivateCurrentTasks = true;
+                taskTimerObj.SetActive(false);
                 // next2.SetActive(true);
             }
         }
@@ -1027,6 +1028,7 @@ public class Level2Controller : MonoBehaviour
             deactivateCurrentTasks = true;
             //StartCoroutine(LoadTask3(1));
             task2End.SetActive(true);
+            
             // next2.SetActive(true);
             
         }
