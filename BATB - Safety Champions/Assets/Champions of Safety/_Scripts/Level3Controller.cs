@@ -557,7 +557,8 @@ public class Level3Controller : MonoBehaviour
             {
                 // next4.SetActive(true);
                 deactivateCurrentTasks = true;
-                StartCoroutine(WaitForLevelCompletion());
+                //StartCoroutine(WaitForLevelCompletion());
+                StartCoroutine(LoadTask5());
             }
             yield break;
         }
@@ -572,6 +573,20 @@ public class Level3Controller : MonoBehaviour
                 //StartCoroutine(WaitForLevelCompletion());
                 Debug.Log("Task 5 sesh");
                 StartCoroutine(LoadTask6());
+            }
+            yield break;
+        }
+        if (taskNum == 6)
+        {
+            Debug.Log("Task 6 hint count: " + task6HintCount);
+            if (task6HintCount == task6TasksCount)
+            {
+                // next4.SetActive(true);
+                deactivateCurrentTasks = true;
+                //StartCoroutine(WaitForLevelCompletion());
+                Debug.Log("Task 5 sesh");
+                //StartCoroutine(LoadTask6());
+                StartCoroutine(WaitForLevelCompletion());
             }
             yield break;
         }
