@@ -879,7 +879,7 @@ public class Level2Controller : MonoBehaviour
         }
            
         else if (taskNum == 3 && task3HintCount == task3TasksCount)
-            LoadTask4(0);
+            LoadTask4(2);
         else if (taskNum == 4 && task4HintCount == task4TasksCount)
             LoadTask5(1);
         else if (taskNum == 5 && task5HintCount == task5TasksCount)
