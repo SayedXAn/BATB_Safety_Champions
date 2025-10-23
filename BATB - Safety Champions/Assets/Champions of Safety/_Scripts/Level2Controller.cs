@@ -8,14 +8,15 @@ public class Level2Controller : MonoBehaviour
 {
     public GameObject mapPanel, levelEndPanel;
 
-    [Header("Progress Meter")]
+    //[Header("Progress Meter")]
     public GameObject progressMeter;
     public GameObject step1, step2, step3, step4, step5, step6, step7, step8, step9;
     public Image step1Img, step2Img, step3Img, step4Img, step5Img, step6Img, step7Img, step8Img, step9Img;
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Start, task1Promt, task1, task1EndInstruction, task1End, task1EndPromt,
+    public GameObject task1Start;
+    public GameObject task1Promt, task1, task1EndInstruction, task1End, task1EndPromt,
         task2Start,task2FadedPromt, task2Promt, task2, task2End,
         task3Start, task3Promt, task3,
         task4Promt1, task4Promt2, task4Promt3, task4,
@@ -27,7 +28,7 @@ public class Level2Controller : MonoBehaviour
     public Image task4Button;
     public Sprite task4Sign;
 
-    [Header("Hint Detectors")]
+    //[Header("Hint Detectors")]
     public GameObject[] rights;
     public GameObject[] wrongs;
     public GameObject[] points;
@@ -269,7 +270,7 @@ public class Level2Controller : MonoBehaviour
     public void OnLoadTask3Clicked()
     {
         TaskCountStarsManager.Instance.ClearStars();
-        StartCoroutine(LoadTask3(0.3f));
+        StartCoroutine(LoadTask3(1f));
     }
 
     public IEnumerator LoadTask3(float waitTime)
@@ -280,6 +281,8 @@ public class Level2Controller : MonoBehaviour
         }
 
         task3Loaded = true;
+        //task2End.SetActive(false);
+        task2.SetActive(false);
 
         if (_taskTimerCoroutineRef != null)
             StopCoroutine(_taskTimerCoroutineRef);
@@ -869,7 +872,11 @@ public class Level2Controller : MonoBehaviour
         if (taskNum == 1 && task1HintCount == task1TasksCount)
            StartCoroutine(WaitForTask1EndPrompt());
         else if (taskNum == 2 && task2HintCount == task2TasksCount)
-           StartCoroutine(LoadTask3(1));
+        {
+            //StartCoroutine(LoadTask3(1));
+            task2End.SetActive(true);
+        }
+           
         else if (taskNum == 3 && task3HintCount == task3TasksCount)
             LoadTask4(0);
         else if (taskNum == 4 && task4HintCount == task4TasksCount)
@@ -1018,7 +1025,8 @@ public class Level2Controller : MonoBehaviour
         else if (taskNum == 2)
         {
             deactivateCurrentTasks = true;
-            StartCoroutine(LoadTask3(1));
+            //StartCoroutine(LoadTask3(1));
+            task2End.SetActive(true);
             // next2.SetActive(true);
             
         }
