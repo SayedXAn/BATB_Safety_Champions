@@ -796,6 +796,8 @@ public class Level2Controller : MonoBehaviour
                 task6NegativePoints += 0.25f;
                 GameManager.Instance.Level2Score -= 0.25f;
             }
+            StopAllCoroutines();
+            StartCoroutine(LoadTask7(2f));
         }
         else if(taskNum == 7 )
         {
@@ -815,6 +817,9 @@ public class Level2Controller : MonoBehaviour
                 task7NegativePoints += 0.25f;
                 GameManager.Instance.Level2Score -= 0.25f;
             }
+            _taskTimerCoroutineRef = null;            
+            StopAllCoroutines();
+            StartCoroutine(LoadTask8(2f));
         }
 
     }
@@ -880,8 +885,7 @@ public class Level2Controller : MonoBehaviour
         {
             //StartCoroutine(LoadTask3(1));
             task2End.SetActive(true);
-        }
-           
+        }           
         else if (taskNum == 3 && task3HintCount == task3TasksCount)
             LoadTask4(2);
         else if (taskNum == 4 && task4HintCount == task4TasksCount)
