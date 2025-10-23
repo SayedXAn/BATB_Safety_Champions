@@ -53,7 +53,7 @@ public class DropHandler : MonoBehaviour, IDropHandler
             right.transform.SetParent(transform.root);
             right.SetActive(true);
             point.SetActive(true);
-            Destroy(right, 2f);
+            Destroy(right, 1f);
         }
         else
         {
@@ -67,7 +67,7 @@ public class DropHandler : MonoBehaviour, IDropHandler
             wrong.transform.SetParent(transform.root);
             wrong.SetActive(true);
             point.SetActive(true);
-            Destroy(wrong, 2f);
+            Destroy(wrong, 1f);
             GameManager.Instance.Level2Score -= 0.25f;
             controller2.task3NegativePoints -= 0.25f;
         }
