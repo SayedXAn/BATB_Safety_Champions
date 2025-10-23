@@ -64,6 +64,10 @@ public class Level2Controller : MonoBehaviour
     public TMP_Dropdown task6DropDown, task7DropDown;
     private int dragDroppedItemCount = 0;
 
+    [Header("Right Wrongs")]
+    public GameObject[] rightSigns;
+    public GameObject[] wrongSigns;
+
     void Start()
     {
         backBtn.SetActive(false);
@@ -1121,6 +1125,7 @@ public class Level2Controller : MonoBehaviour
             if (AudioManager.instance != null)
                 AudioManager.instance.PlaySound("right");
             task8HintCount++;
+            rightSigns[slotID].SetActive(true);
             GameManager.Instance.Level2Score++;
             TaskCountStarsManager.Instance.FillStar();
         }
@@ -1130,6 +1135,7 @@ public class Level2Controller : MonoBehaviour
             if (AudioManager.instance != null)
                 AudioManager.instance.PlaySound("wrong");
             task8NegativePoints += 0.25f;
+            wrongSigns[slotID].SetActive(true);
             GameManager.Instance.Level2Score -= 0.25f;
         }
         if(dragDroppedItemCount == 4)
