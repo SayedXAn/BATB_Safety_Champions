@@ -30,7 +30,7 @@ public class BinDropHandler : MonoBehaviour, IDropHandler
             {
                 AudioManager.instance.PlaySound("right");
             }
-            point.GetComponent<Text>().text = "+1\nAppropriate Bin";
+            point.GetComponent<Text>().text = "+1\nmwVK web";
             right.SetActive(true);
             point.SetActive(true);
         }
@@ -43,7 +43,7 @@ public class BinDropHandler : MonoBehaviour, IDropHandler
             {
                 AudioManager.instance.PlaySound("wrong");
             }
-            point.GetComponent<Text>().text = "-0.25\nWrong Bin";
+            point.GetComponent<Text>().text = "-0.25\nfzj web";
             wrong.SetActive(true);
             point.SetActive(true);
         }

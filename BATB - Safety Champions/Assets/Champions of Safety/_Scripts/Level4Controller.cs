@@ -18,7 +18,7 @@ public class Level4Controller : MonoBehaviour
 
     [Header("Task UI")]
     public GameObject task1Promt;
-    public GameObject task1, task2Promt, task2, task3;
+    public GameObject task1, task2Promt, task2, task3, task3Promt;
     public VideoPlayer vp;
     public Button task1Next;
     public Text answerText;
@@ -140,7 +140,7 @@ public class Level4Controller : MonoBehaviour
     }
     IEnumerator LoadTask2Promt()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         task2Promt.SetActive(true);
         task1.SetActive(false);
     }
@@ -194,9 +194,21 @@ public class Level4Controller : MonoBehaviour
     public void OnTask2NextClicked()
     {
         TaskCountStarsManager.Instance.ClearStars();
-        StartCoroutine(LoadTask3());
+        //StartCoroutine(LoadTask3());
+        StartCoroutine(LoadTask3Promt());
     }
 
+    IEnumerator LoadTask3Promt()
+    {
+        yield return new WaitForSeconds(0.5f);
+        task3Promt.SetActive(true);
+        task2.SetActive(false);
+    }
+
+    public void Task3StartButton()
+    {
+        StartCoroutine(LoadTask3());
+    }
     IEnumerator LoadTask3()
     {
         if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
@@ -290,7 +302,8 @@ public class Level4Controller : MonoBehaviour
             if (task2HintCount == task2TasksCount)
             {
                 // next2.SetActive(true);
-                StartCoroutine(LoadTask3());
+                //StartCoroutine(LoadTask3());
+                StartCoroutine(LoadTask3Promt());
             }
         }
 
@@ -382,7 +395,8 @@ public class Level4Controller : MonoBehaviour
         {
             // LevelCompleted();
             // next2.SetActive(true);
-            StartCoroutine(LoadTask3());
+            //StartCoroutine(LoadTask3());
+            StartCoroutine(LoadTask3Promt());
         }
         else if (taskNum == 3)
         {
