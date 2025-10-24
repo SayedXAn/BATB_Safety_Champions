@@ -17,7 +17,8 @@ public class Level4Controller : MonoBehaviour
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Promt, task1, task2Promt, task2, task3;
+    public GameObject task1Promt;
+    public GameObject task1, task2Promt, task2, task3;
     public VideoPlayer vp;
     public Button task1Next;
     public Text answerText;
@@ -135,8 +136,20 @@ public class Level4Controller : MonoBehaviour
     public void OnTask1NextClicked()
     {
         TaskCountStarsManager.Instance.ClearStars();
+        StartCoroutine(LoadTask2Promt());
+    }
+    IEnumerator LoadTask2Promt()
+    {
+        yield return new WaitForSeconds(2);
+        task2Promt.SetActive(true);
+        task1.SetActive(false);
+    }
+
+    public void Task2StartButton()
+    {
         StartCoroutine(LoadTask2());
     }
+
 
     public IEnumerator LoadTask2()
     {
@@ -165,6 +178,7 @@ public class Level4Controller : MonoBehaviour
         task1.SetActive(false);
         //progressMeter.SetActive(false);
         task2.SetActive(true);
+        //task2Promt.SetActive(true);
 
 
         step1.SetActive(true);
@@ -174,6 +188,8 @@ public class Level4Controller : MonoBehaviour
         deactivateCurrentTasks = false;
         TaskCountStarsManager.Instance.InitiateStars(task2TasksCount);
     }
+
+    
 
     public void OnTask2NextClicked()
     {
@@ -359,7 +375,8 @@ public class Level4Controller : MonoBehaviour
         if (taskNum == 1)
         {
             // next1.SetActive(true);
-            StartCoroutine(LoadTask2());
+            //StartCoroutine(LoadTask2());
+            StartCoroutine(LoadTask2Promt());
         }
         else if (taskNum == 2)
         {
