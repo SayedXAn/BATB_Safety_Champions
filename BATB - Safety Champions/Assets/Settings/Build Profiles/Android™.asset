@@ -21,15 +21,15 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/Champions of Safety/_Scenes/Level 1.unity
+    m_path: Assets/Champions of Safety/_Scenes/Bangla Scenes/Level 1 Bn.unity
   - m_enabled: 1
-    m_path: Assets/Champions of Safety/_Scenes/Level 2.unity
+    m_path: Assets/Champions of Safety/_Scenes/Bangla Scenes/Level 2 Bn.unity
   - m_enabled: 1
-    m_path: Assets/Champions of Safety/_Scenes/Level 3.unity
+    m_path: Assets/Champions of Safety/_Scenes/Bangla Scenes/Level 3 Bn.unity
   - m_enabled: 1
-    m_path: Assets/Champions of Safety/_Scenes/Level 4.unity
+    m_path: Assets/Champions of Safety/_Scenes/Bangla Scenes/Level 4 Bn.unity
   - m_enabled: 1
-    m_path: Assets/Champions of Safety/_Scenes/Level 5.unity
+    m_path: Assets/Champions of Safety/_Scenes/Bangla Scenes/Level 5 Bn.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
