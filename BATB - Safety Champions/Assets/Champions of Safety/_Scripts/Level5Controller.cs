@@ -42,8 +42,11 @@ public class Level5Controller : MonoBehaviour
     public int task1CompletedCount, task2CompletedCount, task3CompletedCount, task4CompletedCount;
     public float task1NegativePoints, task2NegativePoints, task3NegativePoints, task4NegativePoints;
 
+    public PostScore postScore;
+    public Text timeText;
 
     // bool task2Loaded = false, task3Loaded = false, task4Loaded = false;
+    GameManager gameManager;
 
     void Start()
     {
@@ -51,7 +54,11 @@ public class Level5Controller : MonoBehaviour
         // playerScore = PlayerPrefs.GetInt("score");
         maxScore = 40;
 
+
         ShowScore();
+        gameManager = GameManager.Instance;
+
+        //GameManager.Instance.gameStartTime = System.DateTime.Now; //for Testing only
     }
 
     #region Task 1
@@ -309,18 +316,30 @@ public class Level5Controller : MonoBehaviour
         yield return new WaitForSeconds(2f);
         goodJobPanel.SetActive(false);
         task1.SetActive(false);
+
+        GameManager.Instance.gameEndTime = System.DateTime.Now;
+
+
         // percentage = ((float)playerScore / (float)maxScore) * 100f;
 
         // percentage = Mathf.Clamp(percentage,0,100);
         scoreText.text = CalculateFinalScore().ToString("F2") + "%";
+        timeText.text = "Avcbvi †gvU mgq †j‡M‡Qt " + CalculateFinalTime();
         levelEndPanel.SetActive(true);
     }
 
     float CalculateFinalScore()
     {
-        float allLevelsScore = GameManager.Instance.Level1Score + GameManager.Instance.Level2Score + GameManager.Instance.Level3Score + GameManager.Instance.Level4Score + GameManager.Instance.Level5Score;
-        float allLevelsTotalScore = GameManager.Instance.Level1TotalScore + GameManager.Instance.Level2TotalScore + GameManager.Instance.Level3TotalScore + GameManager.Instance.Level4TotalScore + GameManager.Instance.Level5TotalScore;
+        float allLevelsScore = gameManager.Level1Score + gameManager.Level2Score + gameManager.Level3Score + gameManager.Level4Score + gameManager.Level5Score;
+        float allLevelsTotalScore = gameManager.Level1TotalScore + gameManager.Level2TotalScore + gameManager.Level3TotalScore + gameManager.Level4TotalScore + gameManager.Level5TotalScore;
         return (allLevelsScore / allLevelsTotalScore) * 100;
+    }
+
+    string CalculateFinalTime()
+    {
+        string totalTime = (gameManager.gameEndTime - gameManager.gameStartTime).ToString();
+        totalTime = totalTime.Substring(3, 2) + " wgwbU " + totalTime.Substring(6, 2) + " †m‡KÛ";
+        return totalTime;
     }
 
 

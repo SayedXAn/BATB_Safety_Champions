@@ -16,6 +16,14 @@ public class GameManager : MonoBehaviour
 
     public bool GameStarted = false;
 
+    public string userID;
+    public string userName;
+    public string userScore;
+    //public string gameStartTime;
+    public System.DateTime gameStartTime;
+    public System.DateTime gameEndTime;
+    
+
 
     public void ResetScores()
     {
