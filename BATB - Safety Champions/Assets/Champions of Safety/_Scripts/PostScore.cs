@@ -16,6 +16,8 @@ public class PostScore : MonoBehaviour
     public TMP_InputField idIF;
     public TMP_InputField nameIF;
 
+    public GameObject loginPanel;
+
     [System.Serializable]
     public class ScoreData
     {
@@ -32,9 +34,25 @@ public class PostScore : MonoBehaviour
     //}
     public void LoginSubmitButton()
     {
-        GameManager.Instance.userName = nameIF.text;
-        GameManager.Instance.userID = idIF.text;
-        GameManager.Instance.gameStartTime = System.DateTime.Now;
+        if (nameIF.text == "" || idIF.text == "")
+        {
+            if(nameIF.text == "")
+            {
+                nameIF.placeholder.GetComponent<TMP_Text>().text = "Name is required";
+            }
+
+            if(idIF.text == "")
+            {
+                idIF.placeholder.GetComponent<TMP_Text>().text = "ID is required";
+            }
+        }
+        else
+        {
+            GameManager.Instance.userName = nameIF.text;
+            GameManager.Instance.userID = idIF.text;
+            GameManager.Instance.gameStartTime = System.DateTime.Now;
+            loginPanel.SetActive(false);
+        }
         //Debug.Log(System.DateTime.Now);
     }
 
