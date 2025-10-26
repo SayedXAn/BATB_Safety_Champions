@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,10 +21,15 @@ public class PostScore : MonoBehaviour
     {
         public string uuid;
         public string name;
-        public string score;
+        public double score;
         public int game;
     }
 
+    //private void Start()
+    //{
+    //    double roundedValue = Math.Round(96.6463394165039, 2);
+    //    StartCoroutine(PostScoreData("2131asdasd2", "Sayedddasd", roundedValue, 4));
+    //}
     public void LoginSubmitButton()
     {
         GameManager.Instance.userName = nameIF.text;
@@ -34,12 +40,12 @@ public class PostScore : MonoBehaviour
 
 
 
-    public void CallPostAPI()
+    public void CallPostAPI(string id, string name, double score)
     {
-        StartCoroutine(PostScoreData("21312", "abu 31", "4565", 4));
+        StartCoroutine(PostScoreData(id, name, score, 4));
     }
 
-    IEnumerator PostScoreData(string uuid, string name, string score, int game)
+    IEnumerator PostScoreData(string uuid, string name, double score, int game)
     {
         ScoreData data = new ScoreData
         {

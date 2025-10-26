@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Level5Controller : MonoBehaviour
 {
@@ -323,9 +324,13 @@ public class Level5Controller : MonoBehaviour
         // percentage = ((float)playerScore / (float)maxScore) * 100f;
 
         // percentage = Mathf.Clamp(percentage,0,100);
-        scoreText.text = CalculateFinalScore().ToString("F2") + "%";
+        double totalScore = CalculateFinalScore();
+        double roundedValue = Math.Round(totalScore, 2);
+        scoreText.text = totalScore.ToString("F2") + "%";
         timeText.text = "Avcbvi †gvU mgq †j‡M‡Qt " + CalculateFinalTime();
         levelEndPanel.SetActive(true);
+
+        postScore.CallPostAPI(gameManager.userID, gameManager.userName, totalScore);
     }
 
     float CalculateFinalScore()
