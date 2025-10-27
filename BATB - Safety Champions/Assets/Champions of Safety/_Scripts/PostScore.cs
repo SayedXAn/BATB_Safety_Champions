@@ -17,6 +17,7 @@ public class PostScore : MonoBehaviour
     public TMP_InputField nameIF;
 
     public GameObject loginPanel;
+    public GameObject van;
 
     [System.Serializable]
     public class ScoreData
@@ -52,6 +53,7 @@ public class PostScore : MonoBehaviour
             GameManager.Instance.userID = idIF.text;
             GameManager.Instance.gameStartTime = System.DateTime.Now;
             loginPanel.SetActive(false);
+            van.SetActive(true);
         }
         //Debug.Log(System.DateTime.Now);
     }

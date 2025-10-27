@@ -665,7 +665,7 @@ public class Level1Controller : MonoBehaviour
 
     public void ResetAll()
     {
-        GameManager.Instance.ResetScores();
-        SceneManager.LoadScene(0);
+        //GameManager.Instance.ResetScores();
+        //SceneManager.LoadScene(0);
     }
 }

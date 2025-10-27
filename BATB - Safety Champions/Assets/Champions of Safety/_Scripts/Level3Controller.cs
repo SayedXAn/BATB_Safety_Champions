@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Level3Controller : MonoBehaviour
 {
@@ -53,6 +54,11 @@ public class Level3Controller : MonoBehaviour
 
     public GameObject level1ScoreObj, level2ScoreObj, level3ScoreObj, level4ScoreObj, level5ScoreObj;
 
+    GameManager gameManager;
+    public PostScore postScore;
+    public Text timeText;
+    public Text scoreText;
+
     void Start()
     {
         backBtn.SetActive(false);
@@ -75,6 +81,7 @@ public class Level3Controller : MonoBehaviour
         // next3.SetActive(false);
         // next4.SetActive(false);
 
+        gameManager = GameManager.Instance;
         ShowScore();
     }
 
@@ -239,7 +246,7 @@ public class Level3Controller : MonoBehaviour
             AudioManager.instance.PlaySound("wrong");
         }
         //answer is wrong
-        answerText.text = "Right Answer is A";
+        answerText.text = "mwVK DËit dv÷© GBW > W±i WvKv > wi‡cvU© (cÖ_g Ackb)";
         GameManager.Instance.Level3Score -= 0.25f;
         // task3Next.interactable = true;
         //DisableAllOptions();
@@ -256,7 +263,7 @@ public class Level3Controller : MonoBehaviour
         }
         GameManager.Instance.Level3Score -= 0.25f;
         //answer is wrong
-        answerText.text = "Right Answer is A";
+        answerText.text = "mwVK DËit dv÷© GBW > W±i WvKv > wi‡cvU© (cÖ_g Ackb)";
         // task3Next.interactable = true;
         //DisableAllOptions();
     }
@@ -628,7 +635,7 @@ public class Level3Controller : MonoBehaviour
 
     public void OnMapSkipClicked()
     {
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3); //Game End
     }
 
     public void OnNextClicked()
@@ -671,38 +678,7 @@ public class Level3Controller : MonoBehaviour
         StartCoroutine(WaitForLevelCompletion());
     }
 
-    IEnumerator WaitForLevelCompletion()
-    {
-        yield return new WaitForSeconds(0.5f);
-        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
-        taskTimerObj.SetActive(false);
-        TaskCountStarsManager.Instance.ClearStars();
-
-        if (task6HintCount > 0 && task6NegativePoints > 0)
-        {
-            step6Img.sprite = yellow;
-        }
-        else if (task6HintCount == task6TasksCount)
-        {
-            step6Img.sprite = green;
-        }
-        else if (task6HintCount == 0)
-        {
-            step6Img.sprite = red;
-        }
-        else
-        {
-            step6Img.sprite = yellow;
-        }
-        step6.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
-
-        task6Promt.SetActive(false);
-        progressMeter.SetActive(false);
-        levelEndPanel.SetActive(true);
-        Debug.Log("Level 3 end reached");
-    }
+    
 
     IEnumerator TaskTimerCoroutine(int time = 25)
     {
@@ -750,7 +726,7 @@ public class Level3Controller : MonoBehaviour
     }
     public void OnLevelEndNextClicked()
     {
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3);//Game End
         //Application.Quit();
     }
 
@@ -781,5 +757,69 @@ public class Level3Controller : MonoBehaviour
     {
         GameManager.Instance.ResetScores();
         SceneManager.LoadScene(0);
+    }
+
+    //IEnumerator WaitForLevelCompletion()
+    //{
+    //    yield return new WaitForSeconds(f);
+    //    if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+    //    taskTimerObj.SetActive(false);
+    //    TaskCountStarsManager.Instance.ClearStars();
+
+    //    if (task6HintCount > 0 && task6NegativePoints > 0)
+    //    {
+    //        step6Img.sprite = yellow;
+    //    }
+    //    else if (task6HintCount == task6TasksCount)
+    //    {
+    //        step6Img.sprite = green;
+    //    }
+    //    else if (task6HintCount == 0)
+    //    {
+    //        step6Img.sprite = red;
+    //    }
+    //    else
+    //    {
+    //        step6Img.sprite = yellow;
+    //    }
+    //    step6.SetActive(true);
+
+    //    yield return new WaitForSeconds(0.5f);
+
+    //    task6Promt.SetActive(false);
+    //    progressMeter.SetActive(false);
+    //    levelEndPanel.SetActive(true);
+    //    Debug.Log("Level 3 end reached");
+    //}
+
+    IEnumerator WaitForLevelCompletion()
+    {
+        
+        yield return new WaitForSeconds(2f);
+        goodJobPanel.SetActive(false);
+        task6.SetActive(false);
+
+        gameManager.gameEndTime = System.DateTime.Now;
+        double totalScore = CalculateFinalScore();
+        double roundedValue = Math.Round(totalScore, 2);
+        scoreText.text = totalScore.ToString("F2") + "%";
+        timeText.text = "Avcbvi †gvU mgq †j‡M‡Qt " + CalculateFinalTime();
+        levelEndPanel.SetActive(true);
+
+        postScore.CallPostAPI(gameManager.userID, gameManager.userName, totalScore);
+    }
+
+    float CalculateFinalScore()
+    {
+        float allLevelsScore = gameManager.Level1Score + gameManager.Level2Score + gameManager.Level3Score /*+ gameManager.Level4Score + gameManager.Level5Score*/;
+        float allLevelsTotalScore = gameManager.Level1TotalScore + gameManager.Level2TotalScore + gameManager.Level3TotalScore /*+ gameManager.Level4TotalScore + gameManager.Level5TotalScore*/;
+        return (allLevelsScore / allLevelsTotalScore) * 100;
+    }
+
+    string CalculateFinalTime()
+    {
+        string totalTime = (gameManager.gameEndTime - gameManager.gameStartTime).ToString();
+        totalTime = totalTime.Substring(3, 2) + " wgwbU " + totalTime.Substring(6, 2) + " †m‡KÛ";
+        return totalTime;
     }
 }

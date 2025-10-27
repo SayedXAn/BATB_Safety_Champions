@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
 
     public bool GameStarted = false;
 
-    public string userID;
-    public string userName;
-    public string userScore;
+    public string userID = "-";
+    public string userName = "-";
+    public string userScore = "0.00";
     //public string gameStartTime;
     public System.DateTime gameStartTime;
     public System.DateTime gameEndTime;
@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
         Level3Score = 0;
         Level4Score = 0;
         Level5Score = 0;
+        userID = "-";
+        userName = "-";
+        userScore = "0.00";
     }
 
     public void OnBackBtnClicked()

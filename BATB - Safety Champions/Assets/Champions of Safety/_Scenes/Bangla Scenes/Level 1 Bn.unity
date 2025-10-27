@@ -16547,6 +16547,7 @@ MonoBehaviour:
   idIF: {fileID: 1946668527}
   nameIF: {fileID: 1584825546}
   loginPanel: {fileID: 1771616449}
+  van: {fileID: 3133660490268060017}
 --- !u!1 &1781214126
 GameObject:
   m_ObjectHideFlags: 0
@@ -20672,7 +20673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3170126280663911611
 MonoBehaviour:
   m_ObjectHideFlags: 0
