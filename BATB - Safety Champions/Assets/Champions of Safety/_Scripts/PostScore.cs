@@ -60,7 +60,8 @@ public class PostScore : MonoBehaviour
 
     public void CallPostAPI(string id, string name, double score)
     {
-        StartCoroutine(PostScoreData(id, name, score, 4));
+        double roundedValue = Math.Round(score, 2);
+        StartCoroutine(PostScoreData(id, name, roundedValue, 4));
     }
 
     IEnumerator PostScoreData(string uuid, string name, double score, int game)

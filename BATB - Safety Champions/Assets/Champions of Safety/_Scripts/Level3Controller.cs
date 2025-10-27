@@ -15,7 +15,8 @@ public class Level3Controller : MonoBehaviour
     public Sprite red, green, yellow;
 
     [Header("Task UI")]
-    public GameObject task1Promt, task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5, task6Promt, task6;
+    public GameObject task1Promt;
+    public GameObject task1, task2Promt, task2, task3Promt, task3, task4Promt, task4, task5Promt, task5, task6Promt, task6;
 
     [Header("Task End")]
     public GameObject task1End, task2End, task3End, task4End, task5End, task6End;
@@ -289,6 +290,9 @@ public class Level3Controller : MonoBehaviour
     {
         StartCoroutine(LoadTask4());
     }
+    #endregion
+
+    #region Task 4
 
     IEnumerator LoadTask4()
     {
@@ -335,16 +339,29 @@ public class Level3Controller : MonoBehaviour
         _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task4TasksCount * 5));
     }
 
-    #endregion
 
-    #region Task 4
 
     #endregion
 
-    #region Task 5   
+    #region Task 5
+
+    void Task5()
+    {
+        GameManager.Instance.Level3Score = 0;
+        task5Promt.SetActive(false);
+        task5.SetActive(true);
+
+        progressMeter.SetActive(true);
+
+        taskNum = 5;
+        TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+    }
     public void OnTask5NextClicked()
     {
-        StartCoroutine(LoadTask5());
+        //StartCoroutine(LoadTask5());
+        Task5();
     }
 
     IEnumerator LoadTask5()
@@ -383,13 +400,12 @@ public class Level3Controller : MonoBehaviour
         step4.SetActive(true);
         // yield return new WaitForSeconds(2f);
         // goodJobPanel.SetActive(false);
-        task5Promt.SetActive(false);
-        task5.SetActive(true);
+        task5Promt.SetActive(true);
+        task5.SetActive(false);
         progressMeter.SetActive(true);
         taskNum = 5;
         deactivateCurrentTasks = false;
-        TaskCountStarsManager.Instance.InitiateStars(task5TasksCount);
-        _taskTimerCoroutineRef = StartCoroutine(TaskTimerCoroutine(task5TasksCount * 5));
+        
     }
 
     #endregion
@@ -662,27 +678,27 @@ public class Level3Controller : MonoBehaviour
         taskTimerObj.SetActive(false);
         TaskCountStarsManager.Instance.ClearStars();
 
-        if (task4HintCount > 0 && task4NegativePoints > 0)
+        if (task6HintCount > 0 && task6NegativePoints > 0)
         {
-            step4Img.sprite = yellow;
+            step6Img.sprite = yellow;
         }
-        else if (task4HintCount == task4TasksCount)
+        else if (task6HintCount == task6TasksCount)
         {
-            step4Img.sprite = green;
+            step6Img.sprite = green;
         }
-        else if (task4HintCount == 0)
+        else if (task6HintCount == 0)
         {
-            step4Img.sprite = red;
+            step6Img.sprite = red;
         }
         else
         {
-            step4Img.sprite = yellow;
+            step6Img.sprite = yellow;
         }
-        step4.SetActive(true);
+        step6.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
-        task4Promt.SetActive(false);
+        task6Promt.SetActive(false);
         progressMeter.SetActive(false);
         levelEndPanel.SetActive(true);
         Debug.Log("Level 3 end reached");

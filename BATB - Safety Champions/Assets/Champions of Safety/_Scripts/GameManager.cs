@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float Level5Score  = 0;
 
     public int Level1TotalScore  = 17;
-    public int Level2TotalScore  = 15+7;
+    public int Level2TotalScore  = 15+7+2;
     public int Level3TotalScore  = 12+8;
     public int Level4TotalScore  = 17;
     public int Level5TotalScore  = 6;

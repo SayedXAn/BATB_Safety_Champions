@@ -14807,7 +14807,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 144120549117449060, guid: 3dd829cddfa5f3c4eb25fb05139eadce, type: 3}
       propertyPath: m_text
-      value: "bb-Kgc\xF8v\u2021q\xDD \xB8\u2021jv wPw\xFDZ Ki\xE6b"
+      value: "bb-Kgc\xF8v\u2021q\xDD/Avb\u2021mBd \nKw\xDBkb \xB8\u2021jv wPw\xFDZ
+        Ki\xE6b"
       objectReference: {fileID: 0}
     - target: {fileID: 144120549117449060, guid: 3dd829cddfa5f3c4eb25fb05139eadce, type: 3}
       propertyPath: m_fontAsset
@@ -16464,7 +16465,7 @@ GameObject:
   - component: {fileID: 1771616451}
   - component: {fileID: 1771616453}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: LoginPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

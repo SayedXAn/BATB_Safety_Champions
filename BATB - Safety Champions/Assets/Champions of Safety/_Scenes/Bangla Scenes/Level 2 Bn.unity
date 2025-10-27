@@ -1150,65 +1150,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 59508963}
   m_CullTransparentMesh: 1
---- !u!1 &62486615
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 62486617}
-  - component: {fileID: 62486616}
-  m_Layer: 0
-  m_Name: Audio Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &62486616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62486615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e32fbd998eae3e4a9034e6e96e7f2ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: right
-    audioClip: {fileID: 8300000, guid: ba95440b68c8b8246bbfd8806a2c0209, type: 3}
-    volume: 1
-    pitch: 2
-    playOnAwake: 0
-    loop: 0
-    source: {fileID: 0}
-  - name: wrong
-    audioClip: {fileID: 8300000, guid: 0538dc6378e5f4c469e87fbf8de911ce, type: 3}
-    volume: 1
-    pitch: 2
-    playOnAwake: 0
-    loop: 0
-    source: {fileID: 0}
---- !u!4 &62486617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62486615}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &64822230
 GameObject:
   m_ObjectHideFlags: 0
@@ -5504,7 +5445,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 618671995}
         m_TargetAssemblyTypeName: Level2Controller, Assembly-CSharp
-        m_MethodName: OnWrongHintClicked
+        m_MethodName: OnRightHintClicked
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 319468943}
@@ -11205,7 +11146,7 @@ MonoBehaviour:
   task8HintCount: 0
   task9HintCount: 0
   task1TasksCount: 3
-  task2TasksCount: 1
+  task2TasksCount: 3
   task3TasksCount: 3
   task4TasksCount: 3
   task5TasksCount: 5
@@ -19454,7 +19395,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 618671995}
         m_TargetAssemblyTypeName: Level2Controller, Assembly-CSharp
-        m_MethodName: OnWrongHintClicked
+        m_MethodName: OnRightHintClicked
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1138444739}
@@ -30240,8 +30181,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "MvW\xA9\xB8\u2021jv e\xDC n\u2021q\u2021Q|\n\u2020gwkbwU GLb \u2020gBb\u2021UB\u2021b\u2021\xDDi
-    \nRb\xA8 c\xD6\xAF\u2018Z"
+  m_Text: "MvW\xA9\xB8\u2021jv e\xDC n\u2021q\u2021Q|\r\n\u2020gwkbwU GLb Acv\u2021iU\r\nRb\xA8
+    c\xD6\xAF\u2018Z"
 --- !u!222 &1858925681
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34839,6 +34780,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390778271778175739}
   m_CullTransparentMesh: 1
+--- !u!1001 &2758399694184830970
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2856430919875370279, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_Name
+      value: Audio Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084109903374478777, guid: e91513988dd749246addf2c4d139b84a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e91513988dd749246addf2c4d139b84a, type: 3}
 --- !u!224 &2860600750406078569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36664,7 +36662,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 62486617}
+  - {fileID: 2758399694184830970}
   - {fileID: 1405411758}
   - {fileID: 705507995}
   - {fileID: 1143384386}
