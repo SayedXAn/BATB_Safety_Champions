@@ -726,7 +726,7 @@ public class Level3Controller : MonoBehaviour
     }
     public void OnLevelEndNextClicked()
     {
-        //SceneManager.LoadScene(3);//Game End
+        SceneManager.LoadScene(3);
         //Application.Quit();
     }
 
@@ -759,67 +759,67 @@ public class Level3Controller : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    //IEnumerator WaitForLevelCompletion()
-    //{
-    //    yield return new WaitForSeconds(f);
-    //    if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
-    //    taskTimerObj.SetActive(false);
-    //    TaskCountStarsManager.Instance.ClearStars();
-
-    //    if (task6HintCount > 0 && task6NegativePoints > 0)
-    //    {
-    //        step6Img.sprite = yellow;
-    //    }
-    //    else if (task6HintCount == task6TasksCount)
-    //    {
-    //        step6Img.sprite = green;
-    //    }
-    //    else if (task6HintCount == 0)
-    //    {
-    //        step6Img.sprite = red;
-    //    }
-    //    else
-    //    {
-    //        step6Img.sprite = yellow;
-    //    }
-    //    step6.SetActive(true);
-
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    task6Promt.SetActive(false);
-    //    progressMeter.SetActive(false);
-    //    levelEndPanel.SetActive(true);
-    //    Debug.Log("Level 3 end reached");
-    //}
-
     IEnumerator WaitForLevelCompletion()
     {
-        
-        yield return new WaitForSeconds(2f);
-        goodJobPanel.SetActive(false);
-        task6.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        if (_taskTimerCoroutineRef != null) StopCoroutine(_taskTimerCoroutineRef);
+        taskTimerObj.SetActive(false);
+        TaskCountStarsManager.Instance.ClearStars();
 
-        gameManager.gameEndTime = System.DateTime.Now;
-        double totalScore = CalculateFinalScore();
-        double roundedValue = Math.Round(totalScore, 2);
-        scoreText.text = totalScore.ToString("F2") + "%";
-        timeText.text = "Avcbvi †gvU mgq †j‡M‡Qt " + CalculateFinalTime();
+        if (task6HintCount > 0 && task6NegativePoints > 0)
+        {
+            step6Img.sprite = yellow;
+        }
+        else if (task6HintCount == task6TasksCount)
+        {
+            step6Img.sprite = green;
+        }
+        else if (task6HintCount == 0)
+        {
+            step6Img.sprite = red;
+        }
+        else
+        {
+            step6Img.sprite = yellow;
+        }
+        step6.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        task6Promt.SetActive(false);
+        progressMeter.SetActive(false);
         levelEndPanel.SetActive(true);
-
-        postScore.CallPostAPI(gameManager.userID, gameManager.userName, totalScore);
+        Debug.Log("Level 3 end reached");
     }
 
-    float CalculateFinalScore()
-    {
-        float allLevelsScore = gameManager.Level1Score + gameManager.Level2Score + gameManager.Level3Score /*+ gameManager.Level4Score + gameManager.Level5Score*/;
-        float allLevelsTotalScore = gameManager.Level1TotalScore + gameManager.Level2TotalScore + gameManager.Level3TotalScore /*+ gameManager.Level4TotalScore + gameManager.Level5TotalScore*/;
-        return (allLevelsScore / allLevelsTotalScore) * 100;
-    }
+    //IEnumerator WaitForLevelCompletion()
+    //{
 
-    string CalculateFinalTime()
-    {
-        string totalTime = (gameManager.gameEndTime - gameManager.gameStartTime).ToString();
-        totalTime = totalTime.Substring(3, 2) + " wgwbU " + totalTime.Substring(6, 2) + " †m‡KÛ";
-        return totalTime;
-    }
+    //    yield return new WaitForSeconds(2f);
+    //    goodJobPanel.SetActive(false);
+    //    task6.SetActive(false);
+
+    //    gameManager.gameEndTime = System.DateTime.Now;
+    //    double totalScore = CalculateFinalScore();
+    //    double roundedValue = Math.Round(totalScore, 2);
+    //    scoreText.text = totalScore.ToString("F2") + "%";
+    //    timeText.text = "Avcbvi †gvU mgq †j‡M‡Qt " + CalculateFinalTime();
+    //    levelEndPanel.SetActive(true);
+
+    //    postScore.CallPostAPI(gameManager.userID, gameManager.userName, totalScore);
+    //}
+
+//    float CalculateFinalScore()
+//    {
+//        float allLevelsScore = gameManager.Level1Score + gameManager.Level2Score + gameManager.Level3Score /*+ gameManager.Level4Score + gameManager.Level5Score*/;
+//        float allLevelsTotalScore = gameManager.Level1TotalScore + gameManager.Level2TotalScore + gameManager.Level3TotalScore /*+ gameManager.Level4TotalScore + gameManager.Level5TotalScore*/;
+//        return (allLevelsScore / allLevelsTotalScore) * 100;
+//    }
+
+//    string CalculateFinalTime()
+//    {
+//        string totalTime = (gameManager.gameEndTime - gameManager.gameStartTime).ToString();
+//        totalTime = totalTime.Substring(3, 2) + " wgwbU " + totalTime.Substring(6, 2) + " †m‡KÛ";
+//        return totalTime;
+//    }
 }
